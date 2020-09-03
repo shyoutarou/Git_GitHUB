@@ -4,30 +4,41 @@ O Git é um sistema de controle de versão (VCS), um software projetado para reg
 
 O melhor de um VCS é que você controla quase qualquer tipo de arquivo em um computador, não apenas os arquivos de código-fonte. Estudantes costumam usar o controle de versão para acompanhar diferentes versões de um ensaio ou trabalho de pesquisa. Um designer pode usar o controle de versão para manter as versões de uma imagem sem se preocupar em modificar a única versão dessa imagem e o controle de versão oferece a capacidade de explorar novas ideias com seu projeto, com a garantia de que você sempre pode voltar a uma versão anterior. 
 
-## Sistemas Locais de Controle de Versão
+### Sistemas Locais de Controle de Versão
 
 O método de controle de versão de muitas pessoas é copiar os arquivos para outro diretório (talvez um diretório com carimbo de tempo, se eles forem espertos). Esta abordagem é muito comum porque é muito simples, mas também é incrivelmente propensa a erros. É fácil esquecer em qual diretório você está e acidentalmente sobreescrever o arquivo errado ou copiar arquivos que não quer.
 
-<h1 align="center">
-    <img alt="Missed Image" title="#NextLevelWeek" style="object-fit: cover; width:250px; height:250px;" src=".github/sistrmalocal.gif"  />
-</h1>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/sistrmalocal.png" alt="Image" width="100%" />
+</p>
 
 Para lidar com este problema, programadores há muito tempo desenvolveram VCSs locais que tem um banco de dados simples que mantêm todas as alterações nos arquivos sob controle de revisão. No começo dos anos 70 já havia o conceito de versionamento de código fonte. Em 1972 já havia o SCCS (Source Code Control System) desenvolvido na linguagem Snow Ball na Bell Labs e usado em sistemas como o IBM system 370 até o PDP11. Nos 80 foi surgiu sua evolução que foi o RCS (Revision Control System) mantido até hoje. Até mesmo o popular sistema operacional Mac OS X inclui o comando rcs quando você instala as Ferramentas de Desenvolvimento. RCS funciona mantendo conjuntos de alterações (ou seja, as diferenças entre os arquivos) em um formato especial no disco; ele pode, em seguida, re-criar como qualquer arquivo se parecia em qualquer ponto no tempo, adicionando-se todas as alterações.
 
-Sistemas Centralizados de Controle de Versão
+### Sistemas Centralizados de Controle de Versão
+
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/tartaruga.png" alt="Image" width="300px" />
+</p>
+
 
 A próxima questão importante que as pessoas encontram é que elas precisam colaborar com desenvolvedores em outros sistemas. Para lidar com este problema, Sistemas Centralizados de Controle de Versão (CVCSs) foram desenvolvidos. Finalmente por volta de 1990 surgiu o CVS (concorrent Version System) para substituir o RCS, têm um único servidor que contém todos os arquivos de controle de versão, e um número de clientes que usam arquivos a partir desse lugar central modelo chamado hoje de centralizado ou cliente-servidor que era arquitetura da moda nos anos 80 e 90. 
 
 Neste modelo configurava-se um servidor onde ficava o projeto e na máquina de cada desenvolvedor era instalado o cliente que conseguia se conectar nesse servidor. O servidor era responsável por coisas como autenticar o login de cada desenvolvedor para dar permissão de acesso ao código daí o desenvolvedor podia fazer check-out para baixar todo o código fazer check-in para subir as modificações e de tempos em tempos dar update para baixar as últimas modificações do servidor. O servidor também guardava os deltas de modificação, possível graças a ideia de patches. Novas versões adicionaram coisas como delta compresion a economizar espaço no disco guardando os patches zipados e novas funcionalidades foram aparecendo com uma ideia the branchs.
- 
+ <p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/centralvcs.png" alt="Image" width="100%" />
+</p>
 
 Esta configuração oferece muitas vantagens, especialmente sobre VCSs locais. Por exemplo, todo mundo sabe, até certo ponto o que todo mundo no projeto está fazendo. Os administradores têm controle refinado sobre quem pode fazer o que; e é muito mais fácil de administrar um CVCS do que lidar com bancos de dados locais em cada cliente.
 
 Os branch é um conceito simples, mas com operação complicada. O branch é duplicar o diretório do projeto, trabalhar no diretório separado e quando terminar, gerar os patches para aplicar no diretório principal e no fim apagar o diretório duplicado. É uma forma de trabalhar numa funcionalidade que pode demorar ou testar correção de bugs sem atrapalhar o diretório principal. Isso funciona bem se você trabalha sozinho ou com poucas pessoas ou com pessoas que estão muito bem coordenadas entre si caso contrário isso se torna um pesadelo muito rápido. Nos dias de hoje você tem pull requests no GitHub que basicamente um branch do projeto.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/subversion.png" alt="Image" width="300px" />
+</p>
 
- Após o CVS, surgiu o Subversion com o lema de “CVS feito direito” que ainda era no modelo centralizado e com muito problemas ainda em branchs. Porém, foi apenas quando o GitHub atingiu o pico de popularidade, em 2008, que conseguiram consertar branchs, adicionando a funcionalidade de Merge tracking, na versão 1.5. 
+Após o CVS, surgiu o Subversion com o lema de “CVS feito direito” que ainda era no modelo centralizado e com muito problemas ainda em branchs. Porém, foi apenas quando o GitHub atingiu o pico de popularidade, em 2008, que conseguiram consertar branchs, adicionando a funcionalidade de Merge tracking, na versão 1.5. 
 
- O conceito de bloquear arquivos para só uma pessoa usar de cada vez causava muitos problemas também para gerenciar Releases ou fechar versões. Nos anos 90 e começo nos 2000 havia a figura de um gestor de configuração pago em tempo integral para fazer o equivalente fazer commits e tagear versões para não corromper muito o código-fonte. 
+O conceito de bloquear arquivos para só uma pessoa usar de cada vez causava muitos problemas também para gerenciar Releases ou fechar versões. Nos anos 90 e começo nos 2000 havia a figura de um gestor de configuração pago em tempo integral para fazer o equivalente fazer commits e tagear versões para não corromper muito o código-fonte. 
 
 O ponto único de falha que o servidor centralizado representa era outro problema. Se esse servidor der problema por uma hora, durante essa hora ninguém pode colaborar ou salvar as alterações de versão para o que quer que eles estejam trabalhando. Se o disco rígido do banco de dados central for corrompido, e backups apropriados não foram mantidos, você perdia absolutamente tudo - toda a história do projeto, exceto imagens pontuais que desenvolvedores possam ter em suas máquinas locais. Sistemas VCS locais sofrem com esse mesmo problema - sempre que você tenha toda a história do projeto em um único lugar, há o risco de perder tudo.
 
@@ -36,446 +47,651 @@ Outro problema eram as branchs e a razão principal de porque CVS e Subversion t
 Outro grande defeito estrutural do CVS é que ele guardava a revisões por arquivo ele não entende o conceito de um único arquivão (TAR) de patch de uma funcionalidade inteira como um pull request de hoje (que é um conjunto de commits). De forma simplória um commit é nada mais que um arquivo de patch com o cabeçalho com metadados (autor, data e hora). Era difícil de gerenciar a versão no CVS, pois cada desenvolvedor precisava trabalhar em um branch ou fork diferente (uma duplicata do projeto original) só que para combinar as modificações de dezenas de desenvolvedores em uma única versão eram um trabalho que podia levar um dia inteiro ou mais para conseguir fazer esse merge.
 
 Mesmo Subversion não era nem uma grande maravilha, o mundo open-source e o mundo corporativo estavam bem mal servidos, haviam produto comercial bem porcaria como Microsoft Source Safe ou Rational Clear Case. Mundo open-source ainda não tinha tanta força muitos projetos ainda usavam CVS alguns poucos estavam indo para Subversion era mais a filosofia do menos pior.
-       
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/ibmrational.png" alt="Image" width="300px" />
+</p>    
 
 Na virada do século surge a Bit Mover e seu produto Bitkeeper muita gente pensa que a principal diferença entre os sistemas de versionamento anteriores é que seria descentralizado. 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/bitkeeper.png" alt="Image" width="300px" />
+</p>
  
 
 Na realidade a principal novidade foi tornar branchs, forks e principalmente merges operações razoavelmente triviais. Um trabalho que podia levar horas ou dias reduzido para minutos e com muito menos margem de erros. Assim em 2002, apesar de ser um produto comercial de código fechado, o Linus resolve migrar o desenvolvimento do kernell do Linux para o Bitkeeper pois, assim como GitHub, apesar de serem uma ferramenta fechada eles tinham uma política que deixavam projetos open-source usar a ferramenta gratuitamente.
 
 O problema de confiar uma ferramenta comercial é que por um tempo eles permitem usar de graça mas chega um dia que eles podem simplesmente proibir de usar. E isso que ocorreu na relação do BitKeeper com o Linux, após dois ou três anos, por que alguém tentou fazer engenharia reversa do protocolo do Bitkeeper, a Bit Mover resolveu botar restrições demais ao ponto que o Linux ia ficar sem o Bitkeeper.
 
-Sistemas Distribuídos de Controle de Versão
+### Sistemas Distribuídos de Controle de Versão
 
 Outras alternativas comerciais surgiram em 2003 (Darcs), em 2005 (Mercurial, Bazaar e Git), é aqui que Sistemas Distribuídos de Controle de Versão (DVCS) entram em cena. 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/sistemasdustribuidos.png" alt="Image" width="300px" />
+</p>
  
 
 Em um DVCS, clientes não somente usam o estado mais recente dos arquivos: eles duplicam localmente o repositório completo. Assim, se qualquer servidor morrer, e esses sistemas estiverem colaborando por meio dele, qualquer um dos repositórios de clientes podem ser copiado de volta para o servidor para restaurá-lo. Cada clone é de fato um backup completo de todos os dados. O foco dos DVCS era també em resolver o problema de branchs e merges.
+ <p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/servercomputer.png" alt="Image" width="500px" />
+</p>
  
+
 
 Além disso, muitos desses sistemas trabalham muito bem com vários repositórios remotos, tal que você possa colaborar em diferentes grupos de pessoas de maneiras diferentes ao mesmo tempo dentro do mesmo projeto. Isso permite que você configure vários tipos de fluxos de trabalho que não são possíveis em sistemas centralizados, como modelos hierárquicos.
 
-Uma Breve História do Git
+### Uma Breve História do Git
 
 O núcleo (kernel) do Linux é um projeto de código aberto com um escopo bastante grande. A maior parte da vida da manutenção do núcleo o Linux (1991-2002), as mudanças no código eram feitas com patches e tarball. 
-•	Patches: termo da língua inglesa que significa, literalmente, "remendo". É um programa de computador criado para atualizar ou corrigir um software de forma a melhorar sua usabilidade ou performance. Quando patches corrigem bugs ou vulnerabilidades de segurança, se dá o nome de bugfix. Esta técnica pode ser utilizada como uma das formas de distribuir uma liberação de software. É muito utilizada em jogos para computadores de forma a atualizar o conteúdo disponível.
-•	Tarball: tar é um utilitário de software de computador para coletar muitos arquivos em um único arquivo, geralmente chamado de tarball, para fins de distribuição ou backup. O nome é derivado de "Tape ARchive", pois foi desenvolvido originalmente para gravar dados em dispositivos de E/S seqüenciais sem sistema de arquivos próprio. Os conjuntos de dados de archive criados pelo tar contêm vários parâmetros do sistema de arquivos, como nome, data e hora, propriedade, permissões de acesso a arquivos e organização de diretórios. O utilitário de linha de comando foi introduzido pela primeira vez na versão 7 Unix em janeiro de 1979, substituindo o programa tp. A estrutura do arquivo para armazenar essas informações foi padronizada no POSIX.1-1988 e posteriormente no POSIX.1-2001, e tornou-se um formato suportado pela maioria dos sistemas modernos de arquivamento de arquivos.
+- **Patches**: termo da língua inglesa que significa, literalmente, "remendo". É um programa de computador criado para atualizar ou corrigir um software de forma a melhorar sua usabilidade ou performance. Quando patches corrigem bugs ou vulnerabilidades de segurança, se dá o nome de bugfix. Esta técnica pode ser utilizada como uma das formas de distribuir uma liberação de software. É muito utilizada em jogos para computadores de forma a atualizar o conteúdo disponível.
+- **Tarball**: tar é um utilitário de software de computador para coletar muitos arquivos em um único arquivo, geralmente chamado de tarball, para fins de distribuição ou backup. O nome é derivado de "Tape ARchive", pois foi desenvolvido originalmente para gravar dados em dispositivos de E/S seqüenciais sem sistema de arquivos próprio. Os conjuntos de dados de archive criados pelo tar contêm vários parâmetros do sistema de arquivos, como nome, data e hora, propriedade, permissões de acesso a arquivos e organização de diretórios. O utilitário de linha de comando foi introduzido pela primeira vez na versão 7 Unix em janeiro de 1979, substituindo o programa tp. A estrutura do arquivo para armazenar essas informações foi padronizada no POSIX.1-1988 e posteriormente no POSIX.1-2001, e tornou-se um formato suportado pela maioria dos sistemas modernos de arquivamento de arquivos.
 
 Por volta dos anos 70 na época dos Unix que surgiram duas ferramentas que existem até hoje no Linux. Que são termos que todo mundo de Unix e Linux sempre usa mas pouco sabem o que realmente é:
-1.	Ferramenta diff:
-2.	Ferramenta patch:
+1.	**Ferramenta diff**:
+2.	**Ferramenta patch**:
 
-Ferramenta diff
+### Ferramenta diff
 
-Nasceu por volta de 1976 e é usado para tirar diferença entre dois arquivos em um terceiro arquivo. É um problema exponencial que fica lento muito rápido se implementar de jeito incorreto mas existe um algoritmo bem conhecido para encontrar a subsequência comum mais longa (Longgest Common Subsequence) entre dois strings:
-•	No pior caso a complexidade vai ser de O(2m) sendo m o tamanho de um dos arquivos. 
-•	No melhor caso a complexidade cai para O(mv) sendo n e m o tamanho dos dois arquivos 
+Nasceu por volta de 1976 e é usado para tirar diferença entre dois arquivos em um terceiro arquivo. É um problema exponencial que fica lento muito rápido se implementar de jeito incorreto mas existe um algoritmo bem conhecido para encontrar a subsequência comum mais longa (**Longgest Common Subsequence**) entre dois strings:
+- No pior caso a complexidade vai ser de O(2m) sendo m o tamanho de um dos arquivos. 
+- No melhor caso a complexidade cai para O(mv) sendo n e m o tamanho dos dois arquivos 
 
 Para entender como você consegue achar essa subsequencia e a partir dessa subsequencia se um conteúdo existe no arquivo original mas não existe na subsequencia podemos marcar com o caracter com o sinal de menos(-) se não existe no arquivo original mais existe na subsequencia podemos marcar com o sinal de mais(+). Adiciona nessa subsequência alguns metadados como em qual linha do arquivo aquela subsequencia se localiza e chegamos no que chamamos o formato de um patch. Abaixo um exemplo de saída com comando diff do Git:
+
+ <p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitdiff.png" alt="Image" width="500px" />
+</p>
  
 
 Então a ferramenta diff que todo o linux tem consegue achar a subsequencia como mais longa entre dois arquivos adiciona metadados como o número da linha no arquivo e gera esse arquivo de patch (em inglês, remendo) alguns dizem que essa é a origem do nome Apache o servidor web que era feito com um monte de patches ou seja o tipo disso a parte enfim dentro de um arquivo de patch você tem chunk ou hunk que é literalmente nacos de código. Vários nacos de código ou hunks formam um patch que é um remendo daí digamos que você queira mandar as modificações que você fez no arquivo para um amigo seu que tem o mesmo arquivo, você só envia o arquivo de patch 
 
-Ferramenta patch
+### Ferramenta patch
 
 E no linux tem a segunda ferramenta que se chama patch e é feita para aplicar um arquivo de patch no arquivo original para ter a versão novas. Se observar um projeto GitHub já deve ter visto o formato de patches só que colorizado mas é basicamente a mesma coisa. A ferramenta diff tornou mais econômico guardar só as modificações feitas sobre o arquivo original em vez de duplicar o arquivo toda vez só por causa de uma linha modificada então economizamos tanto espaço de disco como banda de rede já que para transferir as modificações pela rede agora pode ir só o patch. Mas observe que se você tiver outro programador que já está colaborando no mesmo projeto não basta só dar o patch para ele ele precisa ter alguma versão do projeto baixado para aplicar esse patch
+
+ <p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/tarball.png" alt="Image" width="500px" />
+</p>
+
 
 Para baixar o projeto nos primórdios da internet era outro problema. Uma forma de fazer isso seria baixar de um servidor de arquivos, só que com baixa velocidade de tráfego de rede, dependendo do tamanho do projeto pode ser um processo bem lento.  Nos anos 70 para trás disco rígido era uma coisa bem cara e a forma mais comuns nos mainframes era armazenada rolos de fita magnética e era preciso tentar desperdiçar menos espaço possível. Daí no fim dos anos 70 nasceu o formato de gravação de arquivos em fita ou “tape arquive”(TAR) a estrutura de dados de um tar é gravar uma série de objetos um atrás do outro tá é traduzido literalmente com alcatrão, poluente de petróleo, um bola de piche. Então se você tem uma bola de piche onde objetos vão grudando você tem um TAR. Na prática pense que em vez de ter 100 arquivos você combinou eles um atrás do outro em um único arquivão. Na prática pense que em vez de ter 100 arquivos você combinou eles um atrás do outro em um único arquivão.
 
  E para ser mais eficiente o comando TAR dos de unix e linux ganhou capacidade de adicionar compressão sem perda a partir dos anos 90. Compressão existem dois tipos 
-•	Lossy(que perde): É extensão jpg para imagens ou mp3 para músic
-•	Lossless(que não perde):  É extensão zip sevenzip, um exemplo algoritmo de compressão mais simples é o algoritmo de Huffman para a compreensão de texto. O formato gzip você vê até hoje em linux usa oalgoritmo Deflate que é uma combinação de uma variação do LZ(Lempel-Ziv) e do Huffman
+- **Lossy(que perde)**: É extensão jpg para imagens ou mp3 para músic
+- **Lossless(que não perde)**:  É extensão zip sevenzip, um exemplo algoritmo de compressão mais simples é o algoritmo de Huffman para a compreensão de texto. O formato gzip você vê até hoje em linux usa oalgoritmo Deflate que é uma combinação de uma variação do LZ(Lempel-Ziv) e do Huffman
 
 Algoritmos de compressãoé outra área que os russos dominam o formato RAR vem de Roschal Archive que é o nome do inventor russo Eugeny Roschal. O zip e o sevenzip vem de outro russo Igor Pavlov. No fim dos anos 80 uns compressores mais famosos na época do MS-DOS eram pkzip que era do americano Phil Katz que também inventou o Deflate do Unix.
 
 Com essas ferramentas já era possível montar um fluxo de trabalho para um projeto como a kernel do Linux. O Linus Torvalds fez um TARball da versão 1.0 da Kernell do Linuz e colocava no servidor FTP público um outro desenvolvedor como Alan Cox ou Andrew Morton baixa do FTP e começa a desenvolver alguma nova funcionalidade quando termina faz um diff dos arquivos e envie anexado no e-mail de volta para o Linus. No unix e Linux existem comandos de terminal para conectar em servidores pop3 ou imap que a gente usa hoje em dia então o Linus conseguia automatizar, baixando o e-mail separava o anexo e usava o comando patch do Linux para aplicar os patches na versão na sua máquina. Se tudo estiver certoi ele fazia um novo TARball versão 1.1 e colocava no servidor. Se você já viu um servidor de FTP já deve ter visto diretório de projetos com TARball de diversas versões. Não é um fluxo de trabalho eficiente em 2020 mais nos anos 90 a gente tá falando do que havia de mais avançado em fluxo de trabalho distribuído. Então a internet, somado com ferramental Linux como diff e patch TAR, gzip, FTP e e-mail permitiram um fluxo de trabalho distribuído e o nascimento do mundo open source como conhecemos hoje alguma variação disso já existia no mundo em Unix nos anos 80 mas foi com o Linux que esse modelo de trabalho começou a ganhar chão.
 
 Em 2002, o projeto do núcleo do Linux começou usar uma DVCS proprietária chamada BitKeeper. Em 2005, a ferramenta passou a ser paga. Depois de lançar a kernell 2.6, por volta de 2005, o Linus Torvalds desenvolve em duas semanas a sua própria ferramenta baseada em lições aprendidas ao usar o BitKeeper. Algumas metas do novo sistema era os seguintes:
-•	Velocidade
-•	Projeto simples
-•	Forte suporte para desenvolvimento não-linear (milhares de ramos paralelos)
-•	Completamente distribuído
-•	Lidar com projetos grandes como o núcleo o Linux com eficiência (velocidade e tamanho dos dados)
+- Velocidade
+- Projeto simples
+- Forte suporte para desenvolvimento não-linear (milhares de ramos paralelos)
+- Completamente distribuído
+- Lidar com projetos grandes como o núcleo o Linux com eficiência (velocidade e tamanho dos dados)
 
 Os problemas resolvidos com o Git, e que não eram pelos versionadores da época, foram:
-1.	Versionamento: é quando você escreve um código e vai salvando em algum diretório e cai nos mesmos erros que todo programador sempre caiu, você vai escrever em cima do seu código de ontem, salvar e depois descobri que fez errado e agora perdeu a versão de ontem. Ou pode ser que você queira renomear ou apagar arquivos e uma hora vai apagar um arquivo que não devia. Depois de apagar coisas por acidente algumas vezes você vai começar a duplicar os arquivos antes de editar e vai começar a ficar com versões diferentes do mesmo arquivo no mesmo diretório e encontra projetos dos outros cheios de arquivos velhos que não deviam estar lá. Esse procedimento de cópias de arquivos, além de ser super ineficiente não só porque vai sujando seu diretório com arquivos desnecessários mais vira um enorme desperdício de espaço em disco.
-2.	Compartilhamento: o segundo problema é qunado você precisa que outro desenvolvedor trabalhe no mesmo projeto que você. Uma das maneiras de fazer isso é colocaro diretório do projeto em alguma pasta compartilhada na rede local daí acontecede os dois abrir o mesmo arquivo para editar você digita e salva o primeiro daí o segundo cara edita a parte dele e salva por cima e pronto você acabou de perder o que estava fazendo. Para resolver parcialmente esse problema que muitos produtos comerciais daquela época como o Source Safe ou Clear Case trabalhavam com o princípio de ter uma camada por cima do sistema de arquivos de rede e ofereciam a opção de bloquear um arquivo ou diretório (dar check-out) daí se esse outro programador tentar abrir o mesmo arquivo sistema vai negar e ele tem que esperar você terminar salvar e dar check-in para desbloquear o arquivo. Isso resolvia parcialmente o problema pois em projetos distribuídos em regiões distantes, caso alguém deixasse de realizar o check-in de seus arquivos, bloqueava o arquivo para edição para outro programador. Esses produtos atendiam somente razoavelmente em casos de equipes pequenas lozalizadas no mesmo escritótio, da mesma empresa, cenários bem limitados.
-3.	Segurança: Uma das coisas que o Linus queria garantir é que os dados no repositório Git sejam sempre confiáveis, ou seja, que que o texto que eu recupero dele é sempre o mesmo que coloquei nele. Para garantir isso, o Git commit, após fazer o comando diff e fazer o patch das alterações ele passa por um algoritmo de hash SHA-1. O  Git armazena tudo em seu banco de dados não pelo nome do arquivo, mas pelo valor de hash do seu conteúdo. Se modificar um bit dentro desse patch o SHA-1 vai mudar completamente e gerando uma nova assinatura, sabemos que o patch está corrompido.
+
+```bash
+index.php
+index2.php
+index3.php
+index-97-02-111.php
+```
+
+1.	**Versionamento**: é quando você escreve um código e vai salvando em algum diretório e cai nos mesmos erros que todo programador sempre caiu, você vai escrever em cima do seu código de ontem, salvar e depois descobri que fez errado e agora perdeu a versão de ontem. Ou pode ser que você queira renomear ou apagar arquivos e uma hora vai apagar um arquivo que não devia. Depois de apagar coisas por acidente algumas vezes você vai começar a duplicar os arquivos antes de editar e vai começar a ficar com versões diferentes do mesmo arquivo no mesmo diretório e encontra projetos dos outros cheios de arquivos velhos que não deviam estar lá. Esse procedimento de cópias de arquivos, além de ser super ineficiente não só porque vai sujando seu diretório com arquivos desnecessários mais vira um enorme desperdício de espaço em disco.
+2.	**Compartilhamento**: o segundo problema é qunado você precisa que outro desenvolvedor trabalhe no mesmo projeto que você. Uma das maneiras de fazer isso é colocaro diretório do projeto em alguma pasta compartilhada na rede local daí acontecede os dois abrir o mesmo arquivo para editar você digita e salva o primeiro daí o segundo cara edita a parte dele e salva por cima e pronto você acabou de perder o que estava fazendo. Para resolver parcialmente esse problema que muitos produtos comerciais daquela época como o Source Safe ou Clear Case trabalhavam com o princípio de ter uma camada por cima do sistema de arquivos de rede e ofereciam a opção de bloquear um arquivo ou diretório (dar check-out) daí se esse outro programador tentar abrir o mesmo arquivo sistema vai negar e ele tem que esperar você terminar salvar e dar check-in para desbloquear o arquivo. Isso resolvia parcialmente o problema pois em projetos distribuídos em regiões distantes, caso alguém deixasse de realizar o check-in de seus arquivos, bloqueava o arquivo para edição para outro programador. Esses produtos atendiam somente razoavelmente em casos de equipes pequenas lozalizadas no mesmo escritótio, da mesma empresa, cenários bem limitados.
+3.	**Segurança**: Uma das coisas que o Linus queria garantir é que os dados no repositório Git sejam sempre confiáveis, ou seja, que que o texto que eu recupero dele é sempre o mesmo que coloquei nele. Para garantir isso, o Git commit, após fazer o comando diff e fazer o patch das alterações ele passa por um algoritmo de hash SHA-1. O  Git armazena tudo em seu banco de dados não pelo nome do arquivo, mas pelo valor de hash do seu conteúdo. Se modificar um bit dentro desse patch o SHA-1 vai mudar completamente e gerando uma nova assinatura, sabemos que o patch está corrompido.
 
 O SHA-1 é uma sequência de 40 caracteres composta de caracteres hexadecimais (0-9 e-f) e é calculada com base no conteúdo de uma estrutura de arquivo ou diretório no Git. Um hash SHA-1 é algo como o seguinte:
 
+```bash
 24b9da6552252987aa493b52f8696cd6d3b00373
+```
+
 
 Os subdiretórios, .cvs (no CVC) e .svn (no Subversion), começavam com o ponto porque em Linux um arquivo que começa com ponto significa escondido. Quando mexia nesses diretórios tinha muita chance de estragar tudo e tem que dar um checkout de novo para reconstruir certo. Em 2003, nem Windows XP em Windows Server entendiam direito arquivos que começavam com o ponto e era um dos motivos principais de quase ninguém usar Subversion no Visual Studio pois não conseguia abrir os projetos. Hoje em dia o Windows já entende arquivos e diretórios que começa com ponto porque o Git faz a mesma coisa ele cria um diretório chamado .git mas ele é diferente do CVC e Subversion  porque na na realidade agora os arquivos diretórios do projeto que você edita que não tem importância o conteúdo de verdade dos arquivos fica no repositório dentro desse .git e por isso só tem um a raiz e não em cada um dos subdiretórios do projeto (como era no CVC e Subversion).
 
 No Git, suponhamos que você crie um projeto de Node.js, C# e faça o comando git init para iniciar, git add para preparar e o primeiro git commit para confirmar. Depois, por acidente, apague os arquivos originais com exceção do diretório .git, se você  der o comando git checkout, o Git vai procurar o arquivo dentro desse .git e recuperar os arquivos sem precisar perguntar nada para nenhum servidor. Porém, se você listar o que tem dentro desse diretório não irá achar os arquivos do projeto, em vez disso vai ter subdiretórios em que o maior é o .git/object (a base de ddos). Nele vai achar um monte de arquivos com nomes de hashes de SHA-1 dos commits, trees e blobs que é a base que o git usa para recuperar os arquivos, criar branchs, etc.
 
-Performance: Os versionadores Mercurial, Bazaar e Darcs apesar de serem descentralizados tinham problema de performance. Mercurial, Bazaar eram feitos em python então eles não tinham como escalar em performance até certo ponto. Darcs era feito em Haskell e também era criticado por problemas de performance. O Git sempre foi super-rápido, porém difícil de usar, mas em casos como esse performance e segurança têm prioridade. O git commit faz algo equivalente ao comando diff, é um patch de modificações desde o commit anterior. O merge faz algo equivalente ao comando patch e o pull request seria equivalente a um Tarball, ou seja, um conjunto de commits. Esses conceitos que garantiram a performance superior do Git em relação a outros versionadores.
+**Performance**: Os versionadores Mercurial, Bazaar e Darcs apesar de serem descentralizados tinham problema de performance. Mercurial, Bazaar eram feitos em python então eles não tinham como escalar em performance até certo ponto. Darcs era feito em Haskell e também era criticado por problemas de performance. O Git sempre foi super-rápido, porém difícil de usar, mas em casos como esse performance e segurança têm prioridade. O git commit faz algo equivalente ao comando diff, é um patch de modificações desde o commit anterior. O merge faz algo equivalente ao comando patch e o pull request seria equivalente a um Tarball, ou seja, um conjunto de commits. Esses conceitos que garantiram a performance superior do Git em relação a outros versionadores.
 
 Em 2007 ninguém fora dos colaboradores da kernel do linux tinham muita ideia sobre Git. Em maio de 2007 o próprio Linus Torvalds dá uma palestra em uma tech-talk dentro do Google:
-https://www.youtube.com/watch?v=4XpnKHJAok8
+[Linus Tovards on Git](https://www.youtube.com/watch?v=4XpnKHJAok8)
  
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/linustovards.png" alt="Image" width="100%" />
+</p>
 
-PROVEDOR DE HOSPEDAGEM DE CÓDIGO
+## PROVEDOR DE HOSPEDAGEM DE CÓDIGO
 
 Os arquivos agora estão sendo controlados por versão, mas tudo ainda está localmente no computador, não sendo possível o acesso remoto dos arquivos. Para resolver esse problema, precisamos de um provedor de hospedagem de código e os mais populares são o GitHub, Azure DevOps, o GitLab e o BitBucket. Além de ser um serviço de hospedagem de repositórios Git, os provedores de hospedagem de código oferecem recursos adicionais para ajudar a melhorar seus repositórios Git em colaboração e facilitar as contribuições entre outros desenvolvedores em todo o mundo. O recurso mais importante que esses provedores oferecem é a capacidade de integrar colaborações de maneira integrada aos seus repositórios Git. 
 
 Para criar uma conta GitHub basta ir para o seguinte endereço: github.com
- 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitcom.png" alt="Image" width="100%" />
+</p>
+
 
 Vamos clicar em Sign Up e preencher um nome de usuário, endereço de email e senha shyoutarou2020.
- 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/createaccount.png" alt="Image" width="100%" />
+</p>
+
 
 Há a etapa de escolha do tipo de plano pessoal que pode ser um plano gratuito para criar repositórios públicos ilimitados ou um plano pago para criar repositórios privados ilimitados. Depois, precisamos verificar o seu endereço de e-mail que nos levará de volta para página do GitHub e fim.
 https://github.com/shyoutarou
  
 
 Na tela para enviar um repositório Git para um provedor é necessário informar um nome válido, no qual, informamos wired-brain-recipes. Em seguida, podemos adicionar uma descrição opcional e temos a opção de tornar esses repositórios públicos ou privados. 
- 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/publicprivate.png" alt="Image" width="100%" />
+</p>
+
 Há uma opção para inicializar esses repositórios com um arquivo leia-me, que é uma maneira rápida e simples de os colaboradores aprenderem mais sobre seus repositórios. E as outras duas opções são para adicionar um Git ignore, que é uma maneira de adicionar arquivos que você não deseja que a versão seja controlada pelo Git; e o outro é adicionar uma licença aos seus repositórios. 
- 
 
-	OBSERVAÇÂO: Caso deseje criar um README.md ou arquivo de Licença na criação do repositório o Git irá criar um commit automático.
- 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/initfiles.png" alt="Image" width="100%" />
+</p>
 
-	Assim, caso você deseje não clonar o repositório primeiro, mas sim, subir um projeto existente adicionando os arquivos, confirmando e definindo o local remoto com o comando:
-git remote add origin https://github.com/shyoutarou/NLW2_Server.git
+## Primeiro conflito
+
+**OBSERVAÇÂO**: Caso deseje criar um README.md ou arquivo de Licença na criação do repositório o Git irá criar um commit automático.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/commitautomatico.png" alt="Image" width="100%" />
+</p>
+
+Assim, caso você deseje não clonar o repositório primeiro, mas sim, subir um projeto existente adicionando os arquivos, confirmando e definindo o local remoto com o comando:
+```bash
+git remote add origin https://github.com/shyoutarou/NLW2_Server.git 
+```
 
 Ao tentar enviar as infomarções ao repositório local ocorrerá um conflito, pois já existe um commit no repositório:
- 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/priimeiroconflito.png" alt="Image" width="100%" />
+</p>
 
-	Não conseguimos fazer pull simples e nem merge, pois a informação do branch não foram criada ainda no repositório remoto:
- 
- 
- 
+Não conseguimos fazer pull simples e nem merge, pois a informação do branch não foram criada ainda no repositório remoto:
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/pullremotebranch.png" alt="Image" width="100%" />
+</p>
 
-	As opções que temos seria reverter o commit com um reset, mas como estamos no primeiro commit não temos nenhuma referência anterior (HEAD ou SHA-1) para voltar. Então não conseguimos fazer o stash. E fazer o checkout, além de poder apagar todos nossos arquivos, não resolveria nada pois o conflito está em relação ao repositório remoto. O Que Fazer??? Uma opção é fazer o:
-git pull –rebase origin máster
- 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/nothingmerge.png" alt="Image" width="100%" />
+</p>
 
-	
+Nem com pull definindo a branch:
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/pullremotemaster.png" alt="Image" width="100%" />
+</p>
+
+As opções que temos seria reverter o commit com um reset, mas como estamos no primeiro commit não temos nenhuma referência anterior (HEAD ou SHA-1) para voltar. Então não conseguimos fazer o stash. E fazer o checkout, além de poder apagar todos nossos arquivos, não resolveria nada pois o conflito está em relação ao repositório remoto. O Que Fazer??? Uma opção é fazer o:
+
+```bash
+git pull –rebase origin master
+```
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/firstpullrebase.png" alt="Image" width="100%" />
+</p>
 
 Caso tenha optado por não criar um arquivo gitignore, mas deseje cria-lo manualmente, siga a seguintes etapas:
 1.	Abra o bloco de notas.
 2.	Adicione o conteúdo do seu arquivo gitignore.
 3.	Clique em "Salvar como" e selecione "todos os arquivos".
 4.	Salve como .gitignore
- 
- 
 
-Como .gitignore funciona
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitignore.png" alt="Image" width="100%" />
+</p>
+
+### Como .gitignore funciona
 
 Quando você faz confirmações em um repositório git, escolhe quais arquivos preparar e confirmar usando git add FILENAME e, em seguida, git commit. Mas e se houver alguns arquivos que você nunca deseja confirmar? É muito fácil comprometê-los acidentalmente (especialmente se você usar o git add. Para preparar todos os arquivos no diretório atual). É aí que um arquivo .gitignore é útil. Ele permite ao Git saber que deve ignorar certos arquivos e não rastreá-los. Os arquivos você deve ignorar geralmente são:
-•	Arquivos de log
-•	Arquivos com chaves / segredos de API, credenciais ou informações confidenciais
-•	Arquivos de sistema inúteis, como .DS_Store no macOS
-•	Arquivos gerados como pastas dist
-•	Dependências que podem ser baixadas de um gerenciador de pacotes
-•	E pode haver outros motivos (talvez você faça pequenos arquivos todo.md)
+- Arquivos de log
+- Arquivos com chaves / segredos de API, credenciais ou informações confidenciais
+- Arquivos de sistema inúteis, como .DS_Store no macOS
+- Arquivos gerados como pastas dist
+- Dependências que podem ser baixadas de um gerenciador de pacotes
+- E pode haver outros motivos (talvez você faça pequenos arquivos todo.md)
 
-Um arquivo .gitignore é um arquivo de texto sem formatação, em que cada linha contém um padrão para os arquivos / diretórios ignorarem. Geralmente, isso é colocado na pasta raiz do repositório, e é isso que eu recomendo. No entanto, você pode colocá-lo em qualquer pasta do repositório e também pode ter vários arquivos .gitignore. Os padrões nos arquivos são relativos ao local desse arquivo .gitignore.
+Um arquivo .gitignore é um arquivo de texto sem formatação, em que cada linha contém um padrão para os arquivos/diretórios ignorarem. Geralmente, isso é colocado na pasta raiz do repositório, e é isso que eu recomendo. No entanto, você pode colocá-lo em qualquer pasta do repositório e também pode ter vários arquivos .gitignore. Os padrões nos arquivos são relativos ao local desse arquivo .gitignore.
 
 Como o arquivo .gitignore é verificado no repositório, há algumas opções se você deseja ignorar alguns arquivos sem adicioná-lo às regras .gitignore do repositório. Por exemplo, você pode ter alguns arquivos especiais com os quais está trabalhando em um projeto específico ou pode usar um editor diferente dos seus colegas de equipe e sempre deseja ignorar esses tipos de arquivos. Se houver alguns arquivos que você deseja ignorar apenas para este repositório, você pode colocá-los em 
-.git/ info/exclude.
-
+```bash
+.git/info/exclude.
+```
 Se houver alguns arquivos que você deseja ignorar em todos os repositórios do seu computador, você pode colocá-los em um arquivo .gitignore global. Primeiro, você deve adicionar uma configuração ao Git com este comando:
-
+```bash
 git config --global core.excludesFile ~/.gitignore
-
+```
 Em seguida, você pode adicionar quaisquer regras globais ao ~/.gitignore. 
 
 O Git não ignorará o arquivo se você já o tiver confirmado. Você precisará deixar de rastrear o arquivo primeiro e, em seguida, ele começará a ignorá-lo. Você pode deixar de rastrear  o arquivo com este comando:
-
+```bash
 git rm --cached FILENAME
+```
 
 Se você estiver com problemas, poderá descobrir por que certos arquivos estão sendo ignorados usando o comando git check-ignore com a opção detalhada.
-
+```bash
 git check-ignore -v example.log
+```
 
 A saída será mais ou menos assim:
-
+```bash
 .gitignore: 1: *. log example.log
+```
 
 Neste exemplo, o arquivo .gitignore na raiz do projeto está fazendo com que o exemplo.log seja ignorado, e o padrão que está causando o fato de ser ignorado é * .log na primeira linha.
 
 O padrão mais fácil é um nome de arquivo literal, no exemplo abaixo ignorará qualquer arquivo chamado .DS_Store, que é um arquivo comum no macOS.
+
+```bash
 .DS_Store
+```
 
 Você pode ignorar diretórios inteiros, apenas incluindo seus caminhos e colocando um / no final. Se você não colocar a barra no final, ela corresponderá aos arquivos e diretórios com esse nome.
-
+```bash
 node_modules/
 Histórico/
+```
 
 O * corresponde a 0 ou mais caracteres (exceto o /). Por exemplo, * .log corresponde a qualquer arquivo que termine com a extensão .log. Outro exemplo é *~, que corresponde a qualquer arquivo que termina com ~, como index.html~. Você também pode usar ?, Que corresponde a qualquer caractere, exceto o /.
 
 Você pode usar um prefixo de! negar um arquivo que seria ignorado. No exemplo abaixo, example.log não é ignorado, mesmo que todos os outros arquivos que terminem com .log sejam ignorados.
+
+```bash
 *.log
 !example.log
+```
 
 Mas lembre-se, você não pode negar um arquivo dentro de um diretório ignorado. No exemplo abaixo, devido a razões de desempenho, o git ainda ignorará logs/example.log porque todo o diretório de logs é ignorado.
+
+```bash
 logs/
 !logs/example.log
+```
 
-** pode ser usado para corresponder a qualquer número de diretórios.
-•	**/logs corresponde a todos os arquivos ou diretórios denominados logs (o mesmo que os logs padrão)
-•	**/logs/*. log corresponde a todos os arquivos que terminam com .log em um diretório de logs
-•	logs/** corresponde a todos os arquivos em um diretório de logs.
-•	logs/**/*. log corresponde a todos os arquivos que terminam com .log no diretório logs e em qualquer um de seus subdiretórios
+| Sintaxe | Ignore  | 
+|:----------|------|
+| ** | pode ser usado para corresponder a qualquer número de diretórios. | 
+| **/logs  | corresponde a todos os arquivos ou diretórios denominados logs (o mesmo que os logs padrão) |
+| **/logs/*.log | corresponde a todos os arquivos que terminam com .log em um diretório de logs | 
+| logs/**  | corresponde a todos os arquivos em um diretório de logs. |
+| logs/**/*.log  | corresponde a todos os arquivos que terminam com .log no diretório logs e em qualquer um de seus subdiretórios | 
 
 Quaisquer linhas que começam com # são comentários:
+
+```bash
 # macOS Files
 .DS_Store
+```
 
 Ao clicar Create repository, vamos para uma página que fornece alguns cenários diferentes e as etapas sobre como atualizar nossos repositórios.
- 
-Temos a opção de utilizar URL https ou SSH, que funcionarão em qualquer lugar, mesmo se você estiver atrás de um firewall ou proxy usando https URL para enviar ou receber alterações do repositório o GitHub solicitará seu nome de usuário e endereço de e-mail para verificação.
- 
 
- Há também uma opção para usar SSH URL para fornecer acesso aos seus repositórios git através do protocolo SSH Secure. Para usar SSH URL, você precisa primeiro gerar um par de chaves SSH e, em seguida, adicionar essa chave pública à sua conta Git nas configurações de perfil usando SSH URL para enviar ou receber alterações nos seus repositórios. O Github solicitará uma senha e você precisará digitar sua palacra-chave SSH. 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/atualizarrepo.png" alt="Image" width="100%" />
+</p>
+
+
+Temos a opção de utilizar URL https ou SSH, que funcionarão em qualquer lugar, mesmo se você estiver atrás de um firewall ou proxy usando https URL para enviar ou receber alterações do repositório o GitHub solicitará seu nome de usuário e endereço de e-mail para verificação.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/quicksetup.png" alt="Image" width="100%" />
+</p>
+
+
+Há também uma opção para usar SSH URL para fornecer acesso aos seus repositórios git através do protocolo SSH Secure. Para usar SSH URL, você precisa primeiro gerar um par de chaves SSH e, em seguida, adicionar essa chave pública à sua conta Git nas configurações de perfil usando SSH URL para enviar ou receber alterações nos seus repositórios. O Github solicitará uma senha e você precisará digitar sua palacra-chave SSH. 
 
 Já que já temos um repositório Git, usaremos a segunda opção para enviar repositórios já existentes da linha de comando para o GitHub. 
- 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitremoteadd.png" alt="Image" width="100%" />
+</p>
+
+
 
 Mas usaremos algumas das etapas no primeiro cenário para criar um arquivo leia-me ao enviar nosso primeiro commit para atualizar nosso repositório remotamente. 
- 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/newrepository.png" alt="Image" width="100%" />
+</p>
 
-Usando a linha de comando
+### Usando a linha de comando
 
 Antes de instalar o Git, precisamos nos familiarizar um pouco com a linha de comando. É importante observar que muitos desses comandos dependem do local do diretório atual; portanto, você deve certificar-se de estar no diretório de projetos antes de executar seus comandos. 
-Windows	Linux / Mac	Descrição
-date	date	Exibir a data atual.
-time	cal	Exibir a hora atual. / Exibir um calendário.
-echo %cd%	pwd	Exibir qual é o diretório atual.
-dir /s /b	ls / ls –l / ls -la	Exibir arquivos/diretórios do diretório atual.
-cd	cd	Mudar o diretório atual.
-cd ..	cd ..	Voltar para o diretório acima.
-mkdir	mkdir	Criar uma pasta.
-copy	cp	Copiar (duplicar) um arquivo.
-move OU ren	mv	Mover (ou renomear) um arquivo ou pasta.
-del	rm	Deletar um arquivo
-rmdir	rm -rf	Deletar uma pasta vazia.
-rmdir /s		Deletar uma pasta que não esteja vazia.
-type	cat	Exibir o conteúdo de um arquivo.
-cls	clear	Limpar o terminal.
-copy NUL	touch
-Criar um arquivo em branco (vazio)
-echo >> FILE		
-tree /f /a	tree	Mostra estrutura em árvore de arquivos e subdiretórios de um diretório especificado
-start	open	Abre em visualização gráfica o diretório especificado
--h ou --help	-h ou --help	Ajuda com um determinado comando
+|     Windows         |     Linux   / Mac    |     Descrição                                                                                |
+|---------------------|----------------------|----------------------------------------------------------------------------------------------|
+|     date            |     date             |     Exibir a data atual.                                                                     |
+|     time            |     cal              |     Exibir a hora atual. / Exibir um calendário.                                             |
+|     echo %cd%       |     pwd              |     Exibir qual é o diretório atual.                                                         |
+|     dir /s /b       | ls / ls –l / ls -la  |     Exibir arquivos/diretórios do diretório atual.                                           |
+|     cd              |     cd               |     Mudar o diretório atual.                                                                 |
+|     cd   ..         | cd ..                |     Voltar para o diretório acima.                                                           |
+|     mkdir           |     mkdir            |     Criar uma pasta.                                                                         |
+|     copy            |     cp               |     Copiar (duplicar) um arquivo.                                                            |
+|     move OU ren     |     mv               |     Mover (ou renomear) um arquivo ou pasta.                                                 |
+|     del             |     rm               |     Deletar um arquivo                                                                       |
+|     rmdir           |     rm -rf           |     Deletar uma pasta vazia.                                                                 |
+|     rmdir /s        |                      |     Deletar uma pasta que não esteja vazia.                                                  |
+|     type            |     cat              |     Exibir o conteúdo de um arquivo.                                                         |
+|     cls             |     clear            |     Limpar o terminal.                                                                       |
+| copy NUL            |     touch            |     Criar um arquivo em branco (vazio)                                                       |
+| echo >> FILE        |                      |                                                                                              |
+| tree /f /a          |     tree             |     Mostra estrutura em árvore de arquivos e   subdiretórios de um diretório especificado    |
+| start               |     open             |     Abre em visualização gráfica o diretório   especificado                                  |
+|     -h ou --help    |     -h ou --help     |     Ajuda com um determinado comando                                                         |
 
-Instale o Git
+### Instale o Git
 
-Para instalar o Git no Windows faça o download no link abaixo:
-https://git-scm.com/download/win
+Para instalar o Git no Windows faça o download no [link](https://git-scm.com/download/win)
 
 O Git para Windows fornece uma emulação BASH chamada Git BASH usada para executar o Git a partir da linha de comando. Os usuários do NIX devem se sentir em casa, pois a emulação BASH se comporta exatamente como o comando "git" nos ambientes LINUX e UNIX. Como os usuários do Windows normalmente esperam interfaces gráficas, o Git for Windows também fornece a GUI do Git, uma alternativa poderosa ao Git BASH, oferecendo uma versão gráfica de quase todas as funções da linha de comando do Git, além de ferramentas visuais de diferenças.
- 
 
-Depois de concluir a instalação, você pode verificar se a instalação foi bem-sucedida digite git –versionpara  obter a versão do Git:
- 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/downloadgit.png" alt="Image" width="100%" />
+</p>
 
-GIT CONFIG
+Depois de concluir a instalação, você pode verificar se a instalação foi bem-sucedida digite git --version para  obter a versão do Git:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitversion.png" alt="Image" width="100%" />
+</p>
+
+
+## GIT CONFIG
 
 Agora que verificamos que o Git foi instalado, a primeira coisa que devemos fazer é definir nosso nome de usuário e endereço de email quando usamos o Git para fazer alterações em nossos arquivos do projeto. O Git usa essas informações para identificar quem fez essas alterações. O Git possui uma ferramenta chamada git config que permite definir configurações.
 
 O git config é a função conveniente usada para definir os valores de configuração do Git em projetos de nível global ou local. Esses níveis de configuração correspondem aos arquivos de texto do .git/config. 
- 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitconfig.png" alt="Image" width="100%" />
+</p>
+
+
 
 Executar o git config modifica arquivos de texto de configuração. A gente vai falar das configurações comuns, como e-mail, nome de usuário e editor. Também vamos falar sobre aliases do Git, que permitem a criação de atalhos para operações usadas com frequência. Saber mais sobre o git config e sobre as diversas configurações do Git ajudam a criar fluxos de trabalho Git poderosos e personalizados.
 
 Se você quiser verificar suas configurações, digite git config --list, e ele listará todas as configurações que Git possui. Se você deseja verificar uma configuração específica, é invocar o comando com o nome de configuração. Isso vai exibir o valor definido desse nome. Nomes de configuração são cadeias de caracteres delimitadas por pontos compostas de "seções" e "chaves" baseadas na hierarquia. Por exemplo: user.email
+
+```bash
 git config user.email
- 
+```
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/usermail.png" alt="Image" width="100%" />
+</p>
 
 Nesse exemplo, o e-mail é propriedade filho do bloco de configuração do usuário. Isso retorna o endereço de e-mail configurado que o Git associa com commits criados no local.
 
-Níveis do git config
+### Níveis do git config
 
 Antes de falar mais sobre o uso do git config, a gente vai discutir os níveis de configuração. O comando git config pode aceitar argumentos para especificar o nível de configuração no qual operar. Os seguintes níveis de configuração estão disponíveis:
-Nível	Descrição
---local	Por padrão, o git config grava em nível local se não houver nenhuma opção de configuração. A configuração de nível local é aplicada no repositório do contexto que o git config for invocado. Os valores de configuração local são armazenados no arquivo que pode ser encontrado no diretório .git do repositório: .git/config
---global	A configuração de nível global é específica do usuário. Isso quer dizer que ela é aplicada a usuários do sistema operacional. Os valores de configuração global são armazenados no arquivo localizado no diretório base do usuário. ~ /.gitconfig em sistemas Unix e C:\<username>\.gitconfig no Windows
---system	A configuração de nível do sistema é aplicada em toda a máquina. Ela abrange todos os usuários do sistema operacional e todos os repositórios. O arquivo da configuração de nível do sistema está no arquivo gitconfig localizado fora do caminho raiz do sistema. $(prefix)/etc/gitconfig nos sistemas Unix. No Windows, esse arquivo pode ser encontrado em C:\Program Files\Git\etc no Windows Vista e versões mais recentes.
+|     Nível       |     Descrição                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|     --local     |     Por padrão, o git config grava em nível local se   não houver nenhuma opção de configuração. A configuração de nível local é   aplicada no repositório do contexto que o git config for invocado. Os valores   de configuração local são armazenados no arquivo que pode ser encontrado no   diretório .git do repositório: .git/config                                                                                                         |
+|     --global    |     A configuração de nível global é específica do   usuário. Isso quer dizer que ela é aplicada a usuários do sistema   operacional. Os valores de configuração global são armazenados no arquivo   localizado no diretório base do usuário. ~ /.gitconfig em sistemas Unix e   C:\<username>\.gitconfig no Windows                                                                                                                                |
+|     --system    |     A configuração de nível do sistema é aplicada em   toda a máquina. Ela abrange todos os usuários do sistema operacional e todos   os repositórios. O arquivo da configuração de nível do sistema está no   arquivo gitconfig localizado fora do caminho raiz do sistema.   $(prefix)/etc/gitconfig nos sistemas Unix. No Windows, esse arquivo pode ser   encontrado em C:\Program Files\Git\etc no Windows Vista e versões mais   recentes.    |
+
 
 Portanto, a ordem de prioridade para os níveis de configuração é: local, global, sistema. Quando o Git procurar valores de configuração, ele vai começar no nível local e ir até o nível de sistema. A seguir estão alguns exemplos de comandos utilizados:
-Comando	Descrição
-git config --global user.name "Your Name" 	Adicione seu nome à configuração global
-git config --global user.email "Your email"    	Adicione seu email à configuração global
-git config --list    	Exibir todas as configurações do git
-git config user.name	Exibe o valor de configuração user.name
-git config user.email	Exibe o valor da configuração user.email
-git config --local --list	Lista a configuração local do git
-git config --global --list	Lista a configuração global do git
-git config --system --list 	Lista a configuração do sistema git
-git config --local log.date relative 	Salve o formato de data relativo na configuração local do Git
-git config --local --edit 	Edita a configuração local do Git
-git config --global --edit 	Edita a configuração global do Git
-git config --system --edit 	Edita a configuração do sistema Git
-git -c core.editor=echo config --local --edit 	Imprime o nome do arquivo de configuração git
-git -c core.editor=nano config --local --edit	Edite o arquivo de configuração git local usando o nano
-git config core.excludesfile	Imprima o valor das configurações do git core.excludesfile
-git flow	um comando git que fica disponível após a instalação do gitflow
+|     Comando                                              |     Descrição                                                          |
+|----------------------------------------------------------|------------------------------------------------------------------------|
+|     git config --global user.name "Your Name"            |     Adicione seu nome à configuração global                            |
+|     git config --global user.email "Your   email"        |     Adicione seu email à configuração global                           |
+|     git config --list                                    |     Exibir todas as configurações do git                               |
+|     git config user.name                                 |     Exibe o valor de configuração user.name                            |
+|     git config user.email                                |     Exibe o valor da configuração user.email                           |
+|     git config --local --list                            |     Lista a configuração local do git                                  |
+|     git config --global --list                           |     Lista a configuração global do git                                 |
+|     git config --system --list                           |     Lista a configuração do sistema git                                |
+|     git config --local log.date relative                 |     Salve o formato de data relativo na configuração local do Git      |
+|     git config --local --edit                            |     Edita a configuração local do Git                                  |
+|     git config --global --edit                           |     Edita a configuração global do Git                                 |
+|     git config --system --edit                           |     Edita a configuração do sistema Git                                |
+|     git -c core.editor=echo config --local --edit        |     Imprime o nome do arquivo de configuração git                      |
+|     git -c core.editor=nano config --local --edit        |     Edite o arquivo de configuração git local usando o nano            |
+|     git config core.excludesfile                         |     Imprima o valor das configurações do git core.excludesfile         |
+|     git flow                                             |     um comando git que fica disponível após a instalação do gitflow    |
+
 
 Para ampliar o conhecimento sobre git config, a gente vai analisar o exemplo no qual o seguinte valor foi gravado:
 
+```bash
 git config --global user.name "shyoutarou"
 git config --global user.email "shyoutarou@gmail.com"
+```
 
 Nesse exemplo, o valor "Rish Rick" para user.name e o valor "shyoutarou@gmail.com" são definidos como o nome e e-mail. Ele usa o sinalizador --global, então esse valor é definido para o usuário atual do sistema operacional. Se você deseja alterar essa configuração global com um nome de usuário ou endereço de email diferente, mas apenas para um projeto específico, você pode executar os mesmos comandos, mas sem a opção --global.
 
-Git config editor – core.editor
+### git config editor – core.editor
 
 Muitos comandos Git iniciam o editor de texto para solicitar mais entradas. Um dos casos de uso mais comuns para git config é configurar qual editor o Git deve usar. A tabela de editores populares e comandos git config correspondentes é apresentada abaixo:
-Editor	Comando
-Atom	git config --global core.editor "atom --wait"~
-Emacs	git config --global core.editor "emacs"~
-Nano	git config --global core.editor "nano -w"~
-Vim	git config --global core.editor "vim"~
-Sublime Text (Mac)	git config --global core.editor "subl -n -w"~
-Sublime Text (Win, instalação 32-bit)	git config --global core.editor "'c:/program files (x86)/sublime text 3/sublimetext.exe' -w"~
-Sublime Text (Win, instalação 64 bit)	git config --global core.editor "'c:/program files/sublime text 3/sublimetext.exe' -w"~
-Textmate	git config --global core.editor "mate -w"~
-Visual Studio Code (VS Code)
-git config --global core.editor "code --wait"
-Notepad++	git config core.editor "notepad++ -multiInst -nosession"
+|     Editor                                   |     Comando                                                                                            |
+|----------------------------------------------|--------------------------------------------------------------------------------------------------------|
+|     Atom                                     |     git config --global core.editor "atom --wait"~                                                     |
+|     Emacs                                    |     git config --global core.editor "emacs"~                                                           |
+|     Nano                                     |     git config --global core.editor "nano -w"~                                                         |
+|     Vim                                      |     git config --global core.editor "vim"~                                                             |
+|     Sublime Text (Mac)                       |     git config --global core.editor "subl -n -w"~                                                      |
+|     Sublime Text (Win, instalação 32-bit)    |     git config --global core.editor "'c:/program files (x86)/sublime   text 3/sublimetext.exe' -w"~    |
+|     Sublime Text (Win, instalação 64 bit)    |     git config --global core.editor "'c:/program files/sublime text   3/sublimetext.exe' -w"~          |
+|     Textmate                                 |     git config --global core.editor "mate -w"~                                                         |
+|     Visual Studio Code (VS   Code)           |     git   config --global core.editor "code --wait"                                                    |
+|     Notepad++                                |     git   config core.editor "notepad++ -multiInst -nosession"                                         |
 
-GIT HELP
+
+### GIT HELP
 
 Para obter ajuda sobre um comando Git específico, como o comando "git add", esta sintaxe pode ser:
-Comando	Descrição
-git help help    	Peça ao git para ajudar sobre seu sistema de ajuda
-git help -a    	Imprima todos os comandos disponíveis do git
-git help -g     	Imprima todos os guias disponíveis do git
-git help glossary	Exibir o glossário git
-git grep string	encontre todos os arquivos com o string fornecido
+|     Comando              |     Descrição                                             |
+|--------------------------|-----------------------------------------------------------|
+|     git help help        |     Peça ao git para ajudar sobre seu sistema de ajuda    |
+|     git help -a          |     Imprima todos os comandos disponíveis do git          |
+|     git help -g          |     Imprima todos os guias disponíveis do git             |
+|     git help glossary    |     Exibir o glossário git                                |
+|     git grep string      |     encontre todos os arquivos com o string fornecido     |
 
- 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/manualpage.png" alt="Image" width="100%" />
+</p>
 
-Comandos LESS 
+
+### Comandos LESS 
 
 	Para mover a tela quando a quantidade de informações é muito grande (Ex.: comando help ou log), utilize o guia abaixo de comandos LESS:
-Comando	No	Descrição
-e  ^E  j  ^N  CR  	*	Avançar uma linha (ou N linhas)
-y  ^Y  k  ^K  ^P  	*	Retrocede uma linha (ou N linhas)
-f  ^F  ^V  SPACE	*	Avança uma janela (ou N linhas)
-b  ^B  ESC-v	*	Retrocede uma janela (ou N linhas)
-z	*	Avance uma janela (e defina a janela como N)
-w	*	Retroceda uma janela (e defina a janela como N)
-ESC-SPACE	*	Encaminha uma janela, mas não para no final do arquivo.
-d  ^D	*	Avance uma meia janela (e defina meia janela como N).
-u  ^U	*	Retroceda uma meia janela (e defina meia janela como N).
-ESC-)  RightArrow	*	Meia largura da tela à direita (ou posições N)
-ESC-(  LeftArrow	*	Esquerda e meia largura da tela (ou posições N)
-ESC-}  ^RightArrow		Direita para a última coluna exibida
-ESC-{  ^LeftArrow		Esquerda para a primeira coluna
-F		Avante para sempre; como "tail -f"
-ESC-F		Como F, mas para quando o padrão de pesquisa é encontrado.
-r  ^R  ^L		Repita a tela
-R		Repita a tela, descartando a entrada em buffer.
-Q		Sai da tela
+|     Comando                 |     No    |     Descrição                                                     |
+|-----------------------------|-----------|-------------------------------------------------------------------|
+|     e  ^E  j    ^N  CR      |     *     |     Avançar uma linha (ou N linhas)                               |
+|     y  ^Y  k    ^K  ^P      |     *     |     Retrocede uma linha (ou N linhas)                             |
+|     f  ^F  ^V    SPACE      |     *     |     Avança uma janela (ou N linhas)                               |
+|     b  ^B  ESC-v            |     *     |     Retrocede uma janela (ou N linhas)                            |
+|     z                       |     *     |     Avance uma janela (e defina a janela como N)                  |
+|     w                       |     *     |     Retroceda uma janela (e defina a janela como N)               |
+|     ESC-SPACE               |     *     |     Encaminha uma janela, mas não para no final do arquivo.       |
+|     d  ^D                   |     *     |     Avance uma meia janela (e defina meia janela como N).         |
+|     u  ^U                   |     *     |     Retroceda uma meia janela (e defina meia janela como N).      |
+|     ESC-)  RightArrow       |     *     |     Meia largura da tela à direita (ou posições N)                |
+|     ESC-(  LeftArrow        |     *     |     Esquerda e meia largura da tela (ou posições N)               |
+|     ESC-}  ^RightArrow      |           |     Direita para a última coluna exibida                          |
+|     ESC-{  ^LeftArrow       |           |     Esquerda para a primeira coluna                               |
+|     F                       |           |     Avante para sempre; como "tail -f"                            |
+|     ESC-F                   |           |     Como F, mas para quando o padrão de pesquisa é encontrado.    |
+|     r  ^R  ^L               |           |     Repita a tela                                                 |
+|     R                       |           |     Repita a tela, descartando a entrada em buffer.               |
+|     Q                       |           |     Sai da tela                                                   |
 
-•	Os comandos marcados com * podem ser precedidos por um número, N.
-•	As notas entre parênteses indicam o comportamento se N for fornecido. Uma chave precedida por um sinal de intercalação indica a tecla Ctrl; assim ^K é ctrl-K.
 
-Comandos Plumbing e Porcelain
+- Os comandos marcados com * podem ser precedidos por um número, N.
+- As notas entre parênteses indicam o comportamento se N for fornecido. Uma chave precedida por um sinal de intercalação indica a tecla Ctrl; assim ^K é ctrl-K.
+
+### Comandos Plumbing e Porcelain
 
 O Git era inicialmente um kit de ferramentas para um sistema de controle de versão e, por isso, possui vários subcomandos que executam trabalhos de baixo nível e foram projetados para serem encadeados no estilo UNIX ou chamados de scripts. Existem dois tipos de comandos no Git:
-1.	Plumbing: comandos que dão acesso ao funcionamento interno do Git. Muitos desses comandos não devem ser usados manualmente na linha de comando, mas como blocos de construção de novas ferramentas e scripts personalizados.
-2.	Porcelain: comandos mais amigáveis (checkout, branch, remote) que tornam o Git um VCS fácil de usar.
+1.	**Plumbing**: comandos que dão acesso ao funcionamento interno do Git. Muitos desses comandos não devem ser usados manualmente na linha de comando, mas como blocos de construção de novas ferramentas e scripts personalizados.
+2.	**Porcelain**: comandos mais amigáveis (checkout, branch, remote) que tornam o Git um VCS fácil de usar.
 
 
-Os Três Estados
+### Os Três Estados
 
 Quando você faz algo no Git, quase sempre dados são adicionados no banco de dados do Git - e não removidos. É difícil fazer algo no sistema que não seja reversível ou para fazê-lo apagar dados de forma alguma. Como em qualquer VCS, você pode perder alterações que ainda não tenham sido adicionadas em um commit; mas depois de fazer o commit no Git do estado atual das alterações, é muito difícil que haja alguma perda, especialmente se você enviar regularmente o seu banco de dados para outro repositório. Isso faz com que o uso do Git seja somente alegria, porque sabemos que podemos experimentar sem o perigo de estragar algo.
- 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/treestados.png" alt="Image" width="100%" />
+</p>
+
 Cada um dos arquivos no diretório de trabalho está em um dos dois estados de alto nível:
-1.	Arquivos rastreados (tracked files) - são arquivos que estavam no último instantâneo (snapshot); eles podem estar em um dos seguintes sub-estados:
-•	Não modificado (unmodified/commited) - são todos os arquivos que não foram modificados desde a última confirmação. Eles ainda serão incluídos no próximo commit, mas permanecerão como estão.
-•	Modificados (modified) - Estes são os arquivos que foram modificados desde a última confirmação (provavelmente os modificamos como parte das correções). Esses arquivos serão incluídos no próximo commit, mas serão incluídos no respectivo novo formulário.
-•	Preparado (staged) - Esses são arquivos que não estão presentes no último commit (por exemplo, arquivos recém-criados) ou são arquivos "modificados" que dizemos ao git para incluir no próximo commit. Os arquivos são adicionados à preparação usando o comando "add" do git.
-2.	Arquivos não rastreados (untracked files) - todos os arquivos que não estão sendo rastreados, ou seja, o Git não existe. Você pode alterar o estado desses arquivos para "rastreado - preparado" usando o comando "add" do Git.
+1.	**Arquivos rastreados (tracked files)** - são arquivos que estavam no último instantâneo (snapshot); eles podem estar em um dos seguintes sub-estados:
+- **Não modificado (unmodified/commited)** - são todos os arquivos que não foram modificados desde a última confirmação. Eles ainda serão incluídos no próximo commit, mas permanecerão como estão.
+- **Modificados (modified)** - Estes são os arquivos que foram modificados desde a última confirmação (provavelmente os modificamos como parte das correções). Esses arquivos serão incluídos no próximo commit, mas serão incluídos no respectivo novo formulário.
+- **Preparado (staged)** - Esses são arquivos que não estão presentes no último commit (por exemplo, arquivos recém-criados) ou são arquivos "modificados" que dizemos ao git para incluir no próximo commit. Os arquivos são adicionados à preparação usando o comando "add" do git.
+2.	**Arquivos não rastreados (untracked files)** - todos os arquivos que não estão sendo rastreados, ou seja, o Git não existe. Você pode alterar o estado desses arquivos para "rastreado - preparado" usando o comando "add" do Git.
 
 Se você clonar um repositório git, todos os arquivos do projeto serão iniciados no estado "não modificado".
- 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/naomodificado.png" alt="Image" width="100%" />
+</p>
+
 
 Se você editar qualquer um desses arquivos (por exemplo, usando um editor de texto como o vim), o estado desses arquivos será alterado para "modificado"
- 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/modificado.png" alt="Image" width="100%" />
+</p>
+
 
 Nesse estágio, se você fizer um git "commit", o arquivo editado não será confirmado, porque os arquivos modificados precisam primeiro ser "testados" para serem incluídos no próximo commit. Isso é feito usando o comando "add" do git:
- 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/adddogit.png" alt="Image" width="100%" />
+</p>
+
 
 Você também usa o comando "add" do git para ter novos arquivos "staged" para que eles sejam incluídos no próximo commit:
- 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/proximocommit.png" alt="Image" width="100%" />
+</p>
+
 
 Depois disso, quando estiver satisfeito com tudo, você tira uma foto instantânea usando o comando "commit" do git. Isso resulta na sobreposição dos arquivos do commit anterior com os arquivos recentemente preparados, a fim de criar um novo instantâneo (também conhecido como commit). Você então repete o ciclo novamente.
 
 Outra coisa que você pode querer fazer é remover um arquivo rastreado do projeto. Isso é feito usando o comando rm do git:
- 
-.
-Um projeto git é composto de 3 partes principais:
- 
 
-•	Diretório de trabalho - Este é o diretório em que todos os arquivos e pastas do projeto residem (junto com a pasta .git). Cada um dos seus arquivos neste diretório está em um dos possíveis estados, não rastreados, não modificados, modificados, em etapas. É aqui que você trabalha, edita seus arquivos, testa seu código. O Git geralmente respeitará a área de trabalho para evitar a destruição de dados, mas existem alguns comandos que destroem os dados na área de trabalho.  Portanto, em geral, não assuma que seus dados estão seguros até que você os tenha confirmado.  Depois de confirmar seus dados, o Git os armazena no que considera a área realmente importante, o repositório.
-•	Área de preparação (Staging Area/Index) - Essa é uma camada hipotética que fica no topo da camada da última confirmação. Quando você executa o comando "git commit", as duas camadas são mescladas. Todos os arquivos que estão na camada de confirmação, que possuem um arquivo mais novo diretamente acima (na "camada intermediária"), serão sobrescritos pelo arquivo mais recente (preparado). Observe que o conteúdo de um arquivo é rastreado para que você possa reverter a aparência do arquivo nos instantâneos anteriores (confirmações). Observe que a área de preparação também é conhecida como "índice". Praticamente todos os sistemas de controle de versão existentes têm uma área de trabalho e um repositório, mas o índice é exclusivo do Git, ou pelo menos o Git é o único sistema de controle de versão que permite modificar o índice diretamente.  Você pode visualizar o índice como algo que fica entre a área de trabalho e o repositório.  Você geralmente não move os dados da área de trabalho diretamente para o repositório, mas percorre o índice.  
-•	Diretório. git - este é basicamente o banco de dados do seu repositório git. Este é provavelmente o principal motivo pelo qual você usa o Git.  O repositório contém todo o histórico do projeto.  Quando você faz o commit, ele vai aqui.  
-•	O Stash (esconderijo): é como uma área de transferência que você pode usar para armazenar dados temporariamente enquanto manipula as outras áreas.  
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/removedogit.png" alt="Image" width="100%" />
+</p>
+
+
+Um projeto git é composto de 3 partes principais:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/partesprincipasi.png" alt="Image" width="100%" />
+</p>
+
+
+- **Diretório de trabalho** - Este é o diretório em que todos os arquivos e pastas do projeto residem (junto com a pasta .git). Cada um dos seus arquivos neste diretório está em um dos possíveis estados, não rastreados, não modificados, modificados, em etapas. É aqui que você trabalha, edita seus arquivos, testa seu código. O Git geralmente respeitará a área de trabalho para evitar a destruição de dados, mas existem alguns comandos que destroem os dados na área de trabalho.  Portanto, em geral, não assuma que seus dados estão seguros até que você os tenha confirmado.  Depois de confirmar seus dados, o Git os armazena no que considera a área realmente importante, o repositório.
+- **Área de preparação (Staging Area/Index)** - Essa é uma camada hipotética que fica no topo da camada da última confirmação. Quando você executa o comando "git commit", as duas camadas são mescladas. Todos os arquivos que estão na camada de confirmação, que possuem um arquivo mais novo diretamente acima (na "camada intermediária"), serão sobrescritos pelo arquivo mais recente (preparado). Observe que o conteúdo de um arquivo é rastreado para que você possa reverter a aparência do arquivo nos instantâneos anteriores (confirmações). Observe que a área de preparação também é conhecida como "índice". Praticamente todos os sistemas de controle de versão existentes têm uma área de trabalho e um repositório, mas o índice é exclusivo do Git, ou pelo menos o Git é o único sistema de controle de versão que permite modificar o índice diretamente.  Você pode visualizar o índice como algo que fica entre a área de trabalho e o repositório.  Você geralmente não move os dados da área de trabalho diretamente para o repositório, mas percorre o índice.  
+- **Diretório. git** - este é basicamente o banco de dados do seu repositório git. Este é provavelmente o principal motivo pelo qual você usa o Git.  O repositório contém todo o histórico do projeto.  Quando você faz o commit, ele vai aqui.  
+- **O Stash (esconderijo)**: é como uma área de transferência que você pode usar para armazenar dados temporariamente enquanto manipula as outras áreas.  
 
 A maioria dos comandos no Git pode ser entendida em termos de dois elementos:
-1)	Como esse comando move os dados pelas quatro áreas?  Ele copia dados do índice para o repositório?  Do repositório para a área de trabalho?  Exclui dados de qualquer uma das áreas?  
-2)	O que esse comando faz ao repositório?  O repositório é a mais importante das quatro áreas.  Então, como esse comando altera os dados lá?  Ele cria novas confirmações, move ramificações, move a referência do cabeçalho?  
+1)	**Como esse comando move os dados pelas quatro áreas?**  Ele copia dados do índice para o repositório?  Do repositório para a área de trabalho?  Exclui dados de qualquer uma das áreas?  
+2)	**O que esse comando faz ao repositório?**  O repositório é a mais importante das quatro áreas.  Então, como esse comando altera os dados lá?  Ele cria novas confirmações, move ramificações, move a referência do cabeçalho?  
 
 Não importa o quão confuso um comando pareça. Se você puder responder a essas duas perguntas, poderá obtê-lo, pelo menos amplamente.  Se você deseja obter um novo arquivo rastreado pelo repositório git, use o comando “git checkout” para efetuar o checkout do projeto. Isso extrairá o commit mais recente (instantâneo) do banco de dados do repositório .git (para uma ramificação específica) e o colocará no diretório de trabalho. Todos os arquivos recém-retirados têm o estado do arquivo “não modificado” (mais sobre os estados dos arquivos posteriormente).
- 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitcheckout.png" alt="Image" width="100%" />
+</p>
+
 
 Adicione/crie o arquivo em algum lugar dentro do diretório de trabalho. Isso tornará o git ciente da existência desse arquivo e não o acompanhará. ou seja, o estado do arquivo é "não rastreado". Use o comando "git add" para colocar esse arquivo na área de preparação, esperando para ser mesclado na confirmação anterior (captura instantânea). Isso mudará o estado do arquivo para "staged".
- 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/parastaged.png" alt="Image" width="100%" />
+</p>
+
 
 Use o comando "git commit" para adicionar o arquivo e criar uma nova captura instantânea composta da "layer" de confirmação anterior, juntamente com os arquivos na "staged layer". Isso mudará o estado do arquivo para "não modificado".
- 
 
-Conheça SHA-1
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/paranaomodificado.png" alt="Image" width="100%" />
+</p>
+
+### Conheça SHA-1
 
 Em sua essência, o Git é apenas um mapa, uma estrutura simples que mapeia chaves para valores, e essa estrutura é persistente, está armazenada no seu disco.  Os valores são apenas sequências de bytes. Por exemplo, o conteúdo de um arquivo de texto ou mesmo um arquivo binário. Qualquer sequência de bytes pode ser um valor. Você pode atribuir um valor ao Git e ele calculará uma chave para ele, um hash. O Git calcula hashes com o algoritmo SHA-1, conhecido de maneira informal também como "Shawn". A seguir a descrição de alguns comandos Git que podem ser utilizados:
-Comando	Descrição
-echo "Apple Pie" | git hash-object --stdin	Imprime e gera um SHA-1 da string. Se adicionar o parâmetro –w é gravado a string dentro do diretório .git/object
+|     Comando                                        |     Descrição                                                                                                              |
+|----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+|     echo "Apple Pie" \| git hash-object --stdin    |     Imprime e gera um SHA-1 da string. Se adicionar o parâmetro –w é   gravado a string dentro do diretório .git/object    |
 
 Cada parte do conteúdo possui seu próprio SHA ‑ 1. Por exemplo, vamos pegar um conteúdo, a sequência "Apple Pie". Se você pedir ao Git para gerar um SHA-1 a partir dessa string, você obterá esse hash. 
+```bash
 Apple Pie = bb3918d5053fea31fc9a58fae1e5bdeabe3ec647
+```
 
 Existe apenas um hash para essa sequência. Os SHA-1s são 20 bytes no formato hexadecimal, portanto, são uma sequência de 40 dígitos hexadecimais. Essa será a chave do Git para armazenar esse conteúdo no mapa. Também podemos calcular o SHA-1 na linha de comando com o comando git hash-object. Primeiro, devemos usar o comando echo para gerar esse conteúdo e canalizar o resultado em um objeto hash. Se digitarmos o comando diretamente o Git pensará que "Apple Pie" é o nome de um arquivo e emitirá erro.
- 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/applepiehash.png" alt="Image" width="100%" />
+</p>
+
 
 Se você alterar alguma coisa no conteúdo, uma única letra, você obterá um SHA-1 completamente diferente. Todo objeto em um repositório Git tem um SHA1. Se você colocar a sequência "Apple Pie" no arquivo e armazená-lo no Git, o SHA-1 que acabamos de gerar identificará o arquivo. Os diretórios também têm seu próprio SHA-1, assim como confirmações e assim por diante. Para todos os fins práticos, os SHA1-s são únicos. Não apenas o único em seu projeto, você pode pensar neles como se fossem únicos no universo. Você pode colocar todos os dados que você escreverá em sua vida no mesmo repositório Git, e o Git atribuirá um SHA-1 diferente para cada versão de cada arquivo em cada pasta. 
 
 Se quiser que o conteúdo "Apple Pie" seja persistente, posso adicionar o argumento -w a este comando. -W significa gravação. Então agora, além de gerar o hash, o Git também salvará esse conteúdo em seu repositório. No entanto, agora ainda não temos um repositório, se eu tentar esse comentário imediatamente, o Git reclama. 
- 
 
-Inicializar um novo repositório Git
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/hashobject.png" alt="Image" width="100%" />
+</p>
+
+### Inicializar um novo repositório Git
 
 Com o Git instalado, é hora de adicionar o Git ao seu projeto. Isso é feito inicializando um novo repositório git, que são um armazenamento virtual do seu projeto. Em outras palavras, cada projeto no Git é referenciado como repositório para inicializar um novo projeto ou um projeto que já existe. Primeiro você precisa navegar até essa pasta do projeto usando o comando cd.
+
+```bash
 C:\Users\x_kat\Desktop\cafes_recipes
+```
 
 A seguir a descrição de alguns comandos Git que podem ser utilizados:
-Comando	Descrição
-git init	Inicialize um repositório git no repositório atual
-git ls-files	Listar os arquivos no repositório
-start PATH	Abre o Windows Explorer no caminho espicificado
+|     Comando                                 |     Descrição                                                                              |
+|---------------------------------------------|--------------------------------------------------------------------------------------------|
+|     git init                                |     Inicialize um repositório git no repositório atual                                     |
+|     git ls-files                            |     Listar os arquivos no repositório                                                      |
+|     git   ls-files \| xargs cat \| wc -l    |     No PowerShel, conta o total de linhas do arquivos do repositório,   recursivamente.    |
+|     git   ls-files \| xargs wc -l           |                                                                                            |
+|     start PATH                              |     Abre o Windows Explorer no caminho espicificado                                        |
 
 Agora que estamos na pasta, a inicialização de repositórios Git é feita digitando o comando Git init. Depois de executado, você verá uma mensagem de resposta que diz inicializada. 
- 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/inicialixada.png" alt="Image" width="100%" />
+</p>
+
 
 Quando você executa o git init em um diretório novo ou existente, o Git cria o diretório .git, que é onde quase tudo o que o Git armazena e manipula está localizado. Se você deseja fazer backup ou clonar seu repositório, copiar esse diretório único em outro lugar oferece quase tudo o que você precisa. O subdiretório .git que marcou essa pasta do projeto e todo o seu conteúdo para ser controlado por versão; esse subdiretório .git está oculto por padrão. 
- 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitoculto.png" alt="Image" width="100%" />
+</p>
+
+
 
 Mas você pode entrar nessa pasta digitando “cd .git” e, em seguida, você pode usar o comando dir para fornecer uma lista dos arquivos nessa pasta. 
- 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/listaocultos.png" alt="Image" width="100%" />
+</p>
 
-O diretório .git contém todos os metadados importantes para obter esses novos repositórios. Para abrir o diretório no Windows Explorer, digite:
+
+
+O diretório .git contém todos os metadados importantes para obter esses novos repositórios. Para abrir o diretório no Windows Explorer, digite no Windows:
+```bash
 start .git
- 
- 
+```
+
 
 Você pode ver outros arquivos lá, mas este é um repositório git init novo, é o que você vê por padrão. 
 Entrada	Descrição
@@ -521,9 +737,9 @@ NTFS	4,294,967,295
 exFAT	2,796,202
 
 Os dados mais importantes estão no diretório chamado banco de dados de objetos.  Existem alguns tipos diferentes de objetos no banco de dados;  
-•	objetos blobs: representam o conteúdo de um arquivo em algum momento da história do projeto.  
-•	objetos tree (árvores): que representam pastas no projeto.  É um ponteiro SHA-1 para um blob ou subárvore com seu modo, tipo e nome de arquivo associados.
-•	objetos commit:  Sempre que você faz um commit do git, o Git cria um commit.  
+- objetos blobs: representam o conteúdo de um arquivo em algum momento da história do projeto.  
+- objetos tree (árvores): que representam pastas no projeto.  É um ponteiro SHA-1 para um blob ou subárvore com seu modo, tipo e nome de arquivo associados.
+- objetos commit:  Sempre que você faz um commit do git, o Git cria um commit.  
 
 Todos esses objetos são imutáveis, podem ser criados e excluídos, mas nunca podem ser alterados.  Esses objetos são vinculados em uma estrutura que representa o histórico do seu projeto.  
 
@@ -842,10 +1058,10 @@ GIT RESET
 
 Entendendo a reset     
 Os 4 comandos Git que movem implicitamente uma ramificação, como um efeito colateral da criação de novas confirmações ou da retirada remota são:
-•	Commit: cria uma nova confirmação e move a ramificação atual para apontar para a nova confirmação.  
-•	Merge: cria um commit na maioria dos casos, e também move o branch atual para parte do novo commit.  
-•	Rebase: cria novas confirmações copiando confirmações existentes nesse caso e move a ramificação atual para apontar para uma das novas confirmações.  
-•	Pull: obtém novas confirmações de um controle remoto e atualiza as ramificações local e remota.  
+- Commit: cria uma nova confirmação e move a ramificação atual para apontar para a nova confirmação.  
+- Merge: cria um commit na maioria dos casos, e também move o branch atual para parte do novo commit.  
+- Rebase: cria novas confirmações copiando confirmações existentes nesse caso e move a ramificação atual para apontar para uma das novas confirmações.  
+- Pull: obtém novas confirmações de um controle remoto e atualiza as ramificações local e remota.  
 
 No entanto, apenas comando reset é uma operação especializada para mover uma ramificação. A coisa mais importante que um reset faz é apenas isso: move uma ramificação. Geralmente o ramo atual, o ramo para o qual a cabeça está apontada.  Você escolhe um commit, e o reset move o ramo atual para esse commit, para que a commit agora seja a commit atual.  Observe que a reset não move o HEAD.  A cabeça ainda está apontando para o mesmo ramo em que estava apontando antes, mas o próprio ramo está se movendo, de modo que a cabeça está seguindo o caminho.  Se você olhar apenas para o repositório, é tudo o que a reset faz; move uma ramificação para apontar para o commit específico.  
 
@@ -855,9 +1071,9 @@ A parte que você pode achar confusa, no entanto, não é o que um reset faz no 
 
 O reset faz coisas diferentes, dependendo de suas opções.  
  
-•	A opção --hard, copiará os dados do novo commit atual para a área de trabalho e o índice. 
-•	A opção --mixed, copia dados do novo commit atual para o índice, mas deixa a área de trabalho em paz.  Esta é a opção padrão, se você não der nenhuma opção para redefinir, será uma redefinição mista.  
-•	A opção --soft significa não tocar em nenhuma das áreas, basta mover o ramo e pular completamente a etapa dois.  
+- A opção --hard, copiará os dados do novo commit atual para a área de trabalho e o índice. 
+- A opção --mixed, copia dados do novo commit atual para o índice, mas deixa a área de trabalho em paz.  Esta é a opção padrão, se você não der nenhuma opção para redefinir, será uma redefinição mista.  
+- A opção --soft significa não tocar em nenhuma das áreas, basta mover o ramo e pular completamente a etapa dois.  
 
 A opção –hard
 
@@ -886,7 +1102,7 @@ Mas digamos que tinha um arquivo que eu não podia perder. Para voltar os commit
 git checkout -b (pra criar um novo branch) teste e o SHA-1.
  
 
-Se eu quiser recuperar de volta pro master, basta dar git checkout master pra voltar pro máster. Se dermos git log veja que o master continua apontando 2 commits pra trás, mas acabamos de anexar a etiqueta de teste pro commit antigo.
+Se eu quiser recuperar de volta pro master, basta dar git checkout master pra voltar pro master. Se dermos git log veja que o master continua apontando 2 commits pra trás, mas acabamos de anexar a etiqueta de teste pro commit antigo.
  
 
 Como estamos trabalhando só localmente sem dar push ou pull de servidor, podemos fazer um git rebase teste. E se dermos git log de novo veja que o branch master está apontando pro mesmo commit que o branch teste, pronto, tá tudo recuperado. E podemos apagar o branch temporário com git branch -d teste para deixar tudo limpo tudo limpo.
@@ -1144,14 +1360,14 @@ E truncará qualquer linha de assunto com mais de 72 caracteres com reticências
 3)	Coloque em maiúscula a linha de assunto
 
 Isto é tão simples quanto parece. Comece todas as linhas de assunto com uma letra maiúscula.
-•	Certo: Acelerar para 88 milhas por hora
-•	Errado: acelerar para 88 milhas por hora
+- Certo: Acelerar para 88 milhas por hora
+- Errado: acelerar para 88 milhas por hora
 
 4)	Não termine o assunto com um período
 
 A pontuação à direita é desnecessária nas linhas de assunto. Além disso, o espaço é precioso quando você tenta mantê-los com 50 caracteres ou menos.
-•	Certo:  Abrir as portas do compartimento
-•	Errado: Abrir as portas do compartimento.
+- Certo:  Abrir as portas do compartimento
+- Errado: Abrir as portas do compartimento.
 
 5)	Use o infinitivo na linha de assunto
 
@@ -1168,16 +1384,16 @@ Uma linha de assunto de confirmação do Git formada corretamente deve sempre se
 Se aplicado, esse commit irá “descrever linha de assunto”
 
 Por exemplo:
-•	Se aplicado, esse commit irá refatorar o subsistema X para facilitar a leitura
-•	Se aplicado, esse commit irá atualizar a documentação de introdução
-•	Se aplicado, esse commit irá remover métodos obsoletos
-•	Se aplicado, este commit irá lançar a versão 1.0.0
+- Se aplicado, esse commit irá refatorar o subsistema X para facilitar a leitura
+- Se aplicado, esse commit irá atualizar a documentação de introdução
+- Se aplicado, esse commit irá remover métodos obsoletos
+- Se aplicado, este commit irá lançar a versão 1.0.0
 
 Como estamos mais acostumados a falar no indicativo ou por outras formas não infinitivas, que trata de relatar fatos ou descrever conteúdos e objetos, com esse padrão não funciona:
-•	Se aplicado, esse commit irá Corrigido o erro com Y
-•	Se aplicado, esse commit irá Mudando o comportamento de X
-•	Se aplicado, esse commit irá Mais correções para coisas quebradas
-•	Se aplicado, esse commit irá Novos métodos API agradáveis
+- Se aplicado, esse commit irá Corrigido o erro com Y
+- Se aplicado, esse commit irá Mudando o comportamento de X
+- Se aplicado, esse commit irá Mais correções para coisas quebradas
+- Se aplicado, esse commit irá Novos métodos API agradáveis
 
      	Lembre-se: O uso do infinitivo é importante apenas na linha de assunto. Você pode relaxar essa restrição ao escrever o corpo.
 
@@ -1198,10 +1414,10 @@ Dê uma olhada no diff completo e pense em quanto tempo o autor está economizan
 TAGS 
 
 No banco de dados de objetos Git temos quatro tipos de objetos:
-•	Blobs (conteúdo arbitrário)
-•	Trees (equivale a diretórios)
-•	Commits 
-•	Tags
+- Blobs (conteúdo arbitrário)
+- Trees (equivale a diretórios)
+- Commits 
+- Tags
 
 Uma tag é como um rótulo para o estado atual do projeto, existem dois tipos de tags no Git: 
 1.	Tags anotadas: são as que acompanham uma mensagem. Essa tag contém muitas informações úteis, como a data em que a tag foi criada, quem a criou, uma descrição e assim por diante.
@@ -1351,10 +1567,10 @@ GIT LOG
 A vantagem de um sistema de controle de versão é que ele registra alterações. Esses registros nos permitem recuperar os dados como confirmações, descobrir bugs, atualizações. Mas toda essa história será inútil se não pudermos navegar nela. Neste ponto, precisamos do comando git log. O Git log é uma ferramenta utilitária para revisar e ler um histórico de tudo o que acontece com um repositório. Várias opções podem ser usadas com um log git para tornar o histórico mais específico.
 
 Geralmente, o log do git é um registro de confirmações. Um log git contém os seguintes dados:
-•	Commit hash: que é um dado de soma de verificação de 40 caracteres gerado pelo algoritmo SHA (Secure Hash Algorithm). É um número único.
-•	Commit Author metadata: as informações de autores, como nome e email do autor.
-•	Commit Date metadata: é um registro de data e hora para a hora da confirmação.
-•	Commit title/message: é a visão geral do commit fornecido na mensagem de commit.
+- Commit hash: que é um dado de soma de verificação de 40 caracteres gerado pelo algoritmo SHA (Secure Hash Algorithm). É um número único.
+- Commit Author metadata: as informações de autores, como nome e email do autor.
+- Commit Date metadata: é um registro de data e hora para a hora da confirmação.
+- Commit title/message: é a visão geral do commit fornecido na mensagem de commit.
 
 Para sair do comando git log basta pressionar a tecla Q (Quit). Ele sairá da situação e voltará para a linha de comando. 
 
@@ -1397,9 +1613,9 @@ git log --oneline
  
 
 Portanto, geralmente podemos dizer que o sinalizador --oneline faz com que o git log seja exibido:
-•	Um commit por linha
-•	Os sete primeiros caracteres do SHA
-•	A mensagem de confirmação
+- Um commit por linha
+- Os sete primeiros caracteres do SHA
+- A mensagem de confirmação
 
 Como podemos ver com mais precisão a partir da saída acima, todo commit é dado apenas em uma linha com um número sha de sete dígitos e uma mensagem de commit.
 
@@ -1411,10 +1627,10 @@ git log --stat
  
 
 Geralmente, podemos dizer que a opção stat é usada para exibir
-•	os arquivos modificados,
-•	O número de linhas que foram adicionadas ou removidas
-•	Uma linha de resumo do número total de registros foi alterada
-•	As linhas que foram adicionadas ou removidas.
+- os arquivos modificados,
+- O número de linhas que foram adicionadas ou removidas
+- Uma linha de resumo do número total de registros foi alterada
+- As linhas que foram adicionadas ou removidas.
 
 git log p 
 
@@ -1424,9 +1640,9 @@ git log --patch       Ou       git log -p
  
 
 Geralmente, podemos dizer que o sinalizador --patch é usado para exibir:
-•	Arquivos modificados
-•	O local das linhas que você adicionou ou removeu
-•	Alterações específicas que foram feitas.
+- Arquivos modificados
+- O local das linhas que você adicionou ou removeu
+- Alterações específicas que foram feitas.
 
 A saída acima está exibindo os arquivos modificados com o local das linhas que foram adicionadas ou removidas.
 
@@ -1489,10 +1705,10 @@ git log --left-right master ...new_branch
 Filtrando o histórico de Commits
 
 Podemos filtrar a saída de acordo com nossas necessidades. É uma característica única do Git. Podemos aplicar muitos filtros como quantidade, data, autor e muito mais na saída. Cada filtro tem suas especificações. Eles podem ser usados para implementar algumas operações de navegação na saída.
-•	Por quantidade: Para limitar a saída do log do git, incluindo a opção - <n>. Se queremos apenas os três últimos commit, podemos passar o argumento -2 no comando git log. Considere a saída abaixo:
+- Por quantidade: Para limitar a saída do log do git, incluindo a opção - <n>. Se queremos apenas os três últimos commit, podemos passar o argumento -2 no comando git log. Considere a saída abaixo:
  
 
-•	Por data e hora: Podemos filtrar a saída por data e hora. Temos que passar o argumento --after ou -before para especificar a data. Esses dois argumentos aceitam uma variedade de formatos de data.: 
+- Por data e hora: Podemos filtrar a saída por data e hora. Temos que passar o argumento --after ou -before para especificar a data. Esses dois argumentos aceitam uma variedade de formatos de data.: 
 git log --after="2020-06-17"
  
 
@@ -1504,7 +1720,7 @@ Também podemos rastrear os commits entre duas datas. Para rastrear as confirma�
 git log --after="2020-06-14" --before="2020-06-17"
  
 
-•	Por autor: Podemos filtrar as confirmações por um usuário específico. Suponha, queremos listar os commits feitos apenas por um membro da equipe em particular. Podemos usar o sinalizador -author para filtrar os commit pelo nome do autor. Este comando usa uma expressão regular e retorna a lista de confirmações feitas por autores que correspondem a esse padrão. Você pode usar o nome exato em vez do padrão. O nome do autor não precisa ser uma correspondência exata; apenas possui a frase especificada.
+- Por autor: Podemos filtrar as confirmações por um usuário específico. Suponha, queremos listar os commits feitos apenas por um membro da equipe em particular. Podemos usar o sinalizador -author para filtrar os commit pelo nome do autor. Este comando usa uma expressão regular e retorna a lista de confirmações feitas por autores que correspondem a esse padrão. Você pode usar o nome exato em vez do padrão. O nome do autor não precisa ser uma correspondência exata; apenas possui a frase especificada.
 git log --author="Nome do autor"
  
 
@@ -1512,15 +1728,15 @@ Como sabemos, o email do autor também está envolvido com o nome do autor, para
 git log --author="@gmail.com"
  
 
-•	Por mensagem de confirmação: Para filtrar as confirmações pela mensagem de confirmação. Podemos usar a opção grep, e ela funcionará como a opção do autor. Podemos usar a forma abreviada de mensagem de confirmação em vez de uma mensagem completa.
+- Por mensagem de confirmação: Para filtrar as confirmações pela mensagem de confirmação. Podemos usar a opção grep, e ela funcionará como a opção do autor. Podemos usar a forma abreviada de mensagem de confirmação em vez de uma mensagem completa.
 git log --grep = "Confirmar mensagem."
  
 
-•	Por conteúdo do arquivo: Para filtrar as confirmações por conteúdo. O parâmetro  –G + o ermo a pesquisar que az a filtragem. 
+- Por conteúdo do arquivo: Para filtrar as confirmações por conteúdo. O parâmetro  –G + o ermo a pesquisar que az a filtragem. 
 git log -Gmoon –patch
  
 
-•	Por comparação de branches: Retorna os commits que foram feitos em um ramo e não estão no outro. Ùtil ao realizar merges. 
+- Por comparação de branches: Retorna os commits que foram feitos em um ramo e não estão no outro. Ùtil ao realizar merges. 
 
 GIT SHOW
 
@@ -1592,7 +1808,7 @@ A execução de git checkout [branch] é bastante semelhante à execução de gi
 1.	Segurança para diretório de trabalho: Ao contrário do reset --hard; o checkout verifica se não está descartando arquivos com alterações neles.  Na verdade, é um pouco mais inteligente que isso - ele tenta fazer uma mesclagem trivial no diretório de trabalho, para que todos os arquivos que você não alterou sejam atualizados.  reset --hard, por outro lado, simplesmente substituirá tudo em geral sem verificar.  
 2.	Atualização do HEAD:  O reset irá mover o ramo que o HEAD aponta, o checkout moverá o próprio HEAD para apontar para outro ramo.  
 
-Por exemplo, digamos que temos os branches máster e develop que apontam para commits diferentes e atualmente estamos no branch develop (então HEAD aponta para isso).  Se rodarmos o git reset master, o branch develop agora apontará para o mesmo commit que o mestre.  Se, em vez disso, rodarmos o git checkout master, o develop não se moverá, o próprio HEAD o fará.  HEAD agora apontará para o mestre.  
+Por exemplo, digamos que temos os branches master e develop que apontam para commits diferentes e atualmente estamos no branch develop (então HEAD aponta para isso).  Se rodarmos o git reset master, o branch develop agora apontará para o mesmo commit que o mestre.  Se, em vez disso, rodarmos o git checkout master, o develop não se moverá, o próprio HEAD o fará.  HEAD agora apontará para o mestre.  
  
 
 Então, nos dois casos, estamos movendo HEAD para apontar para o commit A. Mas como fazemos isso é muito diferente, com o reset o branch que HEAD aponta se move, com o checkout move o próprio HEAD.  
@@ -1646,11 +1862,11 @@ git checkout file	Confira a última versão confirmada do arquivo no seu diretó
 git checkout your_SHA1id	Altere seu diretório de trabalho para corresponder a um SHA1id especificado
 
 Ambos substituem algumas funcionalidades do comando git checkout. O git checkout é um dos comandos Git que fazem várias coisas, e pode ser usado de diferentes maneiras.  Em particular, para entender melhor o comando git restore e switch, ajuda a separar git checkout. Em dois comandos:
-•	Um para ramificações (git switch), que lida apenas com ramificações, não com arquivos. Você pode usá-lo para mover para uma ramificação 
-git checkout máster OU git checkout branch
+- Um para ramificações (git switch), que lida apenas com ramificações, não com arquivos. Você pode usá-lo para mover para uma ramificação 
+git checkout master OU git checkout branch
  
 
-•	Um para arquivos (git restore), que pode cobrir casos de git reset. Se você não quiser manter as modificações de um arquivo. Como você pode reverter as modificações, voltando a ser como era quando foi realizado o último commit (ou clone inicial, ou seja como for que você chegou ao seu working directory):
+- Um para arquivos (git restore), que pode cobrir casos de git reset. Se você não quiser manter as modificações de um arquivo. Como você pode reverter as modificações, voltando a ser como era quando foi realizado o último commit (ou clone inicial, ou seja como for que você chegou ao seu working directory):
 git checkout -- teste.txt
  
 
@@ -1982,15 +2198,15 @@ Usando apenas a fusão bidirecional, as linhas modificadas por dois desenvolvedo
  
 
 Comparando os dois arquivos lado a lado, podemos ver que há três linhas com diferenças:
-•	Linha 30: com o mesmo conflito que tivemos antes.
-•	Linha 51: com um loop for sendo modificado.
-•	Linha 70: onde não sabemos se o "seu" removeu algum código ou o "meu" o adicionou.
+- Linha 30: com o mesmo conflito que tivemos antes.
+- Linha 51: com um loop for sendo modificado.
+- Linha 70: onde não sabemos se o "seu" removeu algum código ou o "meu" o adicionou.
 
 Vamos agora olhar para o ancestral comum para poder resolver adequadamente os conflitos.
  
-•	O conflito na linha 30 pode ser resolvido automaticamente e o "Yours" (colaborador de origem)
-•	O conflito na linha 70 também pode ser resolvido automaticamente para "Mine" (colaborador de destino)
-•	O conflito na linha 51 precisa de resolução manual: você precisa decidir se deseja manter um dos contribuidores, o outro, ou mesmo modificá-lo manualmente.
+- O conflito na linha 30 pode ser resolvido automaticamente e o "Yours" (colaborador de origem)
+- O conflito na linha 70 também pode ser resolvido automaticamente para "Mine" (colaborador de destino)
+- O conflito na linha 51 precisa de resolução manual: você precisa decidir se deseja manter um dos contribuidores, o outro, ou mesmo modificá-lo manualmente.
 
 O Git não prioriza a estrutura de diretórios, mas um grafo, um DAG (Direct Acyclic Graf). O DAG é um grafo de commits. É isso que o comando git commit sempre faz, cria um commit ligado ao anterior. É denominado Acíclico porque os nós desse grafo não apontam de volta um para o outro causando um loop infinito. 
  
@@ -2153,10 +2369,10 @@ Usar git pull ou git pull --rebase ao mesclar com mudanças remotas é uma quest
 Já o comando git pull --rebase é um git fetch seguido de um git rebase. O histórico é linearizado, simplificando nosso trabalho. Porém, a cada rebase alguns commits são reescritos e, nofimdas contas, estamos perdendo informações sobre nosso repositório. Quando acontecem conflitos, corrigi-los pode ser bastante complicado.
 
 O rebase pode ser especialmente problemático se acabarmos mudando um commit já compartilhado com outros membros da nossa equipe. Nossos colegas podem sofrer na hora de obter os commits modificados, já que o Git pode se perder. Não parece uma boa solução usar sempre o merge ou sempre o rebase. Um meio termo parece algo mais sensato:
-•	Utilizar um git pull --rebase para obter mudanças remotas. É uma prática segura porque nossos novos commits locais ainda não foramcompartilhados, ou seja, outrosmembros nemsabem da existência desses commits. Por isso, alterá-los não traz grandes problemas.
-•	Ao trabalharmos emuma nova funcionalidade utilizando uma branch, marcamos sua entrega fazendo um merge. Assim, conseguimos ter uma boa ideia de quando a funcionalidade começou a ser desenvolvida e quando foi reintegrada à branch master.
-•	Se estivermos trabalhando sozinhos na nova funcionalidade, podemos fazer rebases periódicos da master na nossa branch para obter código novo, porém deixando o histórico da branch bem limpo.
-•	É interessante fazer o push da nossa branch solitária emumrepositório remoto, para backup. Mas é importante evitar que alguém faça checkout.
+- Utilizar um git pull --rebase para obter mudanças remotas. É uma prática segura porque nossos novos commits locais ainda não foramcompartilhados, ou seja, outrosmembros nemsabem da existência desses commits. Por isso, alterá-los não traz grandes problemas.
+- Ao trabalharmos emuma nova funcionalidade utilizando uma branch, marcamos sua entrega fazendo um merge. Assim, conseguimos ter uma boa ideia de quando a funcionalidade começou a ser desenvolvida e quando foi reintegrada à branch master.
+- Se estivermos trabalhando sozinhos na nova funcionalidade, podemos fazer rebases periódicos da master na nossa branch para obter código novo, porém deixando o histórico da branch bem limpo.
+- É interessante fazer o push da nossa branch solitária emumrepositório remoto, para backup. Mas é importante evitar que alguém faça checkout.
 
 CLONAR DA ORIGEM REMOTA
 
@@ -2211,7 +2427,7 @@ git clone .\cafes_recipes\.git teste2
 
  
 
-	Se dermos um git log o origin/máster significa o outro diretório local de qual clonamos o projeto:
+	Se dermos um git log o origin/master significa o outro diretório local de qual clonamos o projeto:
 git log --oneline --graph
  
 
@@ -2222,7 +2438,7 @@ git push origin master
 As alterações e arquivo foram para esse repositório “remoto” que está local/privado:
  
  
-	E se voltarmos ao nosso repositório clonado estará clonado com o origin/máster:
+	E se voltarmos ao nosso repositório clonado estará clonado com o origin/master:
  
 
 Se preferir que terceiros não tem acesso ao seu código fonte e dos clientes é possível montar uma instalação privada de GitLab. 
@@ -2423,10 +2639,10 @@ O filter-branch era chamado de opção nuclear do Git porque pode mudar cada com
  
 
 Portanto, esse aviso basicamente me diz: não use mais o filter-branch. Isso porque recentemente, o filter-branch ficou absoleto/depreciado por várias razões.  
-•	É extremamente lenta inusoravelmente (várias ordens de magnitude mais lentas do que deveria ser) para repositórios não triviais.
-•	Está cheio de truques que podem corromper silenciosamente sua reescrita ou pelo menos impedir seus esforços de "limpeza", oferecendo a você algo mais problemático e confuso do que o que você começou.
-•	É muito onerosa para qualquer reescrita que seja um pouco trivial.
-•	O projeto git declarou que os problemas acima com branch-filter não podem ser corrigidos de forma compatível com versões anteriores; eles recomendam que você pare de usar filter-branch
+- É extremamente lenta inusoravelmente (várias ordens de magnitude mais lentas do que deveria ser) para repositórios não triviais.
+- Está cheio de truques que podem corromper silenciosamente sua reescrita ou pelo menos impedir seus esforços de "limpeza", oferecendo a você algo mais problemático e confuso do que o que você começou.
+- É muito onerosa para qualquer reescrita que seja um pouco trivial.
+- O projeto git declarou que os problemas acima com branch-filter não podem ser corrigidos de forma compatível com versões anteriores; eles recomendam que você pare de usar filter-branch
 
 Em vez disso, use esse outro comando chamado filter-repo.  No momento, o filter-repo ainda não faz parte oficialmente do Git.  É distribuído como algo que separa, uma extensão opcional.  
 
@@ -2455,9 +2671,9 @@ Isso repõe e reescreve todos os commit para ter seu novo endereço.  Como as co
 Opção 2: BFG Repo Cleaner
 
 Uma opção ao filter-branch do Git é a ferramenta feita em java chamada BFG. 
-•	Ótima ferramenta para o seu tempo, mas, embora simplifique algumas coisas, está limitada a alguns tipos de reescritas.
-•	Arquitetura não é passível de lidar com mais tipos de reescritas.
-•	Arquitetura apresenta algumas deficiências e bugs, mesmo para o uso pretendido.
+- Ótima ferramenta para o seu tempo, mas, embora simplifique algumas coisas, está limitada a alguns tipos de reescritas.
+- Arquitetura não é passível de lidar com mais tipos de reescritas.
+- Arquitetura apresenta algumas deficiências e bugs, mesmo para o uso pretendido.
 
 Mas resumindo, primeiro você instala Java na sua distro. Como cada um tem seu jeito, veja nas documentações pra cada sistema operacional. Num ubuntu seria um apt install openjdk. Agora você baixa o .jar neste link. Para executar um java, se você não sabe é rodar o comando java -jar com o caminho pra onde você baixou o .jar.
 
