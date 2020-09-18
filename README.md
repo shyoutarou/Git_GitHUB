@@ -9,7 +9,7 @@ O melhor de um VCS é que você controla quase qualquer tipo de arquivo em um co
 O método de controle de versão de muitas pessoas é copiar os arquivos para outro diretório (talvez um diretório com carimbo de tempo, se eles forem espertos). Esta abordagem é muito comum porque é muito simples, mas também é incrivelmente propensa a erros. É fácil esquecer em qual diretório você está e acidentalmente sobreescrever o arquivo errado ou copiar arquivos que não quer.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/sistrmalocal.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/sistrmalocal.png" alt="Image" width="500px" />
 </p>
 
 Para lidar com este problema, programadores há muito tempo desenvolveram VCSs locais que tem um banco de dados simples que mantêm todas as alterações nos arquivos sob controle de revisão. No começo dos anos 70 já havia o conceito de versionamento de código fonte. Em 1972 já havia o SCCS (Source Code Control System) desenvolvido na linguagem Snow Ball na Bell Labs e usado em sistemas como o IBM system 370 até o PDP11. Nos 80 foi surgiu sua evolução que foi o RCS (Revision Control System) mantido até hoje. Até mesmo o popular sistema operacional Mac OS X inclui o comando rcs quando você instala as Ferramentas de Desenvolvimento. RCS funciona mantendo conjuntos de alterações (ou seja, as diferenças entre os arquivos) em um formato especial no disco; ele pode, em seguida, re-criar como qualquer arquivo se parecia em qualquer ponto no tempo, adicionando-se todas as alterações.
@@ -18,7 +18,7 @@ Para lidar com este problema, programadores há muito tempo desenvolveram VCSs l
 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/tartaruga.png" alt="Image" width="300px" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/tartaruga.png" alt="Image" width="200px" />
 </p>
 
 
@@ -26,14 +26,14 @@ A próxima questão importante que as pessoas encontram é que elas precisam col
 
 Neste modelo configurava-se um servidor onde ficava o projeto e na máquina de cada desenvolvedor era instalado o cliente que conseguia se conectar nesse servidor. O servidor era responsável por coisas como autenticar o login de cada desenvolvedor para dar permissão de acesso ao código daí o desenvolvedor podia fazer check-out para baixar todo o código fazer check-in para subir as modificações e de tempos em tempos dar update para baixar as últimas modificações do servidor. O servidor também guardava os deltas de modificação, possível graças a ideia de patches. Novas versões adicionaram coisas como delta compresion a economizar espaço no disco guardando os patches zipados e novas funcionalidades foram aparecendo com uma ideia the branchs.
  <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/centralvcs.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/centralvcs.png" alt="Image" width="500px" />
 </p>
 
 Esta configuração oferece muitas vantagens, especialmente sobre VCSs locais. Por exemplo, todo mundo sabe, até certo ponto o que todo mundo no projeto está fazendo. Os administradores têm controle refinado sobre quem pode fazer o que; e é muito mais fácil de administrar um CVCS do que lidar com bancos de dados locais em cada cliente.
 
 Os branch é um conceito simples, mas com operação complicada. O branch é duplicar o diretório do projeto, trabalhar no diretório separado e quando terminar, gerar os patches para aplicar no diretório principal e no fim apagar o diretório duplicado. É uma forma de trabalhar numa funcionalidade que pode demorar ou testar correção de bugs sem atrapalhar o diretório principal. Isso funciona bem se você trabalha sozinho ou com poucas pessoas ou com pessoas que estão muito bem coordenadas entre si caso contrário isso se torna um pesadelo muito rápido. Nos dias de hoje você tem pull requests no GitHub que basicamente um branch do projeto.
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/subversion.png" alt="Image" width="300px" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/subversion.png" alt="Image" width="200px" />
 </p>
 
 Após o CVS, surgiu o Subversion com o lema de “CVS feito direito” que ainda era no modelo centralizado e com muito problemas ainda em branchs. Porém, foi apenas quando o GitHub atingiu o pico de popularidade, em 2008, que conseguiram consertar branchs, adicionando a funcionalidade de Merge tracking, na versão 1.5. 
@@ -49,7 +49,7 @@ Outro grande defeito estrutural do CVS é que ele guardava a revisões por arqui
 Mesmo Subversion não era nem uma grande maravilha, o mundo open-source e o mundo corporativo estavam bem mal servidos, haviam produto comercial bem porcaria como Microsoft Source Safe ou Rational Clear Case. Mundo open-source ainda não tinha tanta força muitos projetos ainda usavam CVS alguns poucos estavam indo para Subversion era mais a filosofia do menos pior.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/ibmrational.png" alt="Image" width="300px" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/ibmrational2.png" alt="Image" width="300px" />
 </p>    
 
 Na virada do século surge a Bit Mover e seu produto Bitkeeper muita gente pensa que a principal diferença entre os sistemas de versionamento anteriores é que seria descentralizado. 
@@ -111,7 +111,7 @@ Então a ferramenta diff que todo o linux tem consegue achar a subsequencia como
 E no linux tem a segunda ferramenta que se chama patch e é feita para aplicar um arquivo de patch no arquivo original para ter a versão novas. Se observar um projeto GitHub já deve ter visto o formato de patches só que colorizado mas é basicamente a mesma coisa. A ferramenta diff tornou mais econômico guardar só as modificações feitas sobre o arquivo original em vez de duplicar o arquivo toda vez só por causa de uma linha modificada então economizamos tanto espaço de disco como banda de rede já que para transferir as modificações pela rede agora pode ir só o patch. Mas observe que se você tiver outro programador que já está colaborando no mesmo projeto não basta só dar o patch para ele ele precisa ter alguma versão do projeto baixado para aplicar esse patch
 
  <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/tarball.png" alt="Image" width="500px" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/tarball.png" alt="Image" width="200px" />
 </p>
 
 
@@ -162,7 +162,7 @@ Em 2007 ninguém fora dos colaboradores da kernel do linux tinham muita ideia so
 [Linus Tovards on Git](https://www.youtube.com/watch?v=4XpnKHJAok8)
  
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/linustovards.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/linustovards.png" alt="Image" width="300px" />
 </p>
 
 ## PROVEDOR DE HOSPEDAGEM DE CÓDIGO
@@ -179,7 +179,7 @@ Para criar uma conta GitHub basta ir para o seguinte endereço: github.com
 Vamos clicar em Sign Up e preencher um nome de usuário, endereço de email e senha shyoutarou2020.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/createaccount.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/createaccount.png" alt="Image" width="400px" />
 </p>
 
 
@@ -196,7 +196,7 @@ Na tela para enviar um repositório Git para um provedor é necessário informar
 Há uma opção para inicializar esses repositórios com um arquivo leia-me, que é uma maneira rápida e simples de os colaboradores aprenderem mais sobre seus repositórios. E as outras duas opções são para adicionar um Git ignore, que é uma maneira de adicionar arquivos que você não deseja que a versão seja controlada pelo Git; e o outro é adicionar uma licença aos seus repositórios. 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/initfiles.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/initfiles.png" alt="Image" width="500px" />
 </p>
 
 ## Primeiro conflito
@@ -248,7 +248,7 @@ Caso tenha optado por não criar um arquivo gitignore, mas deseje cria-lo manual
 4.	Salve como .gitignore
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitignore.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitignore2.png" alt="Image" width="100%" />
 </p>
 
 ### Como .gitignore funciona
@@ -398,7 +398,7 @@ O Git para Windows fornece uma emulação BASH chamada Git BASH usada para execu
 Depois de concluir a instalação, você pode verificar se a instalação foi bem-sucedida digite git --version para  obter a versão do Git:
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitversion.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitversion.png" alt="Image" width="300px" />
 </p>
 
 
@@ -409,7 +409,7 @@ Agora que verificamos que o Git foi instalado, a primeira coisa que devemos faze
 O git config é a função conveniente usada para definir os valores de configuração do Git em projetos de nível global ou local. Esses níveis de configuração correspondem aos arquivos de texto do .git/config. 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitconfig.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitconfig.png" alt="Image" width="500px" />
 </p>
 
 
@@ -461,8 +461,8 @@ Portanto, a ordem de prioridade para os níveis de configuração é: local, glo
 Para ampliar o conhecimento sobre git config, a gente vai analisar o exemplo no qual o seguinte valor foi gravado:
 
 ```bash
-git config --global user.name "shyoutarou"
-git config --global user.email "shyoutarou@gmail.com"
+git config --global user.name "yourname"
+git config --global user.email "youremail@gmail.com"
 ```
 
 Nesse exemplo, o valor "Rish Rick" para user.name e o valor "shyoutarou@gmail.com" são definidos como o nome e e-mail. Ele usa o sinalizador --global, então esse valor é definido para o usuário atual do sistema operacional. Se você deseja alterar essa configuração global com um nome de usuário ou endereço de email diferente, mas apenas para um projeto específico, você pode executar os mesmos comandos, mas sem a opção --global.
@@ -496,7 +496,7 @@ Para obter ajuda sobre um comando Git específico, como o comando "git add", est
 |     git grep string      |     encontre todos os arquivos com o string fornecido     |
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/manualpage.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/manualpage.png" alt="Image" width="500px" />
 </p>
 
 
@@ -552,28 +552,28 @@ Cada um dos arquivos no diretório de trabalho está em um dos dois estados de a
 Se você clonar um repositório git, todos os arquivos do projeto serão iniciados no estado "não modificado".
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/naomodificado.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/naomodificado.png" alt="Image" width="500px" />
 </p>
 
 
 Se você editar qualquer um desses arquivos (por exemplo, usando um editor de texto como o vim), o estado desses arquivos será alterado para "modificado"
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/modificado.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/modificado.png" alt="Image" width="500px" />
 </p>
 
 
 Nesse estágio, se você fizer um git "commit", o arquivo editado não será confirmado, porque os arquivos modificados precisam primeiro ser "testados" para serem incluídos no próximo commit. Isso é feito usando o comando "add" do git:
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/adddogit.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/adddogit.png" alt="Image" width="500px" />
 </p>
 
 
 Você também usa o comando "add" do git para ter novos arquivos "staged" para que eles sejam incluídos no próximo commit:
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/proximocommit.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/proximocommit.png" alt="Image" width="500px" />
 </p>
 
 
@@ -582,7 +582,7 @@ Depois disso, quando estiver satisfeito com tudo, você tira uma foto instantân
 Outra coisa que você pode querer fazer é remover um arquivo rastreado do projeto. Isso é feito usando o comando rm do git:
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/removedogit.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/removedogit.png" alt="Image" width="500px" />
 </p>
 
 
@@ -605,21 +605,21 @@ A maioria dos comandos no Git pode ser entendida em termos de dois elementos:
 Não importa o quão confuso um comando pareça. Se você puder responder a essas duas perguntas, poderá obtê-lo, pelo menos amplamente.  Se você deseja obter um novo arquivo rastreado pelo repositório git, use o comando “git checkout” para efetuar o checkout do projeto. Isso extrairá o commit mais recente (instantâneo) do banco de dados do repositório .git (para uma ramificação específica) e o colocará no diretório de trabalho. Todos os arquivos recém-retirados têm o estado do arquivo “não modificado” (mais sobre os estados dos arquivos posteriormente).
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitcheckout.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitcheckout.png" alt="Image" width="500px" />
 </p>
 
 
 Adicione/crie o arquivo em algum lugar dentro do diretório de trabalho. Isso tornará o git ciente da existência desse arquivo e não o acompanhará. ou seja, o estado do arquivo é "não rastreado". Use o comando "git add" para colocar esse arquivo na área de preparação, esperando para ser mesclado na confirmação anterior (captura instantânea). Isso mudará o estado do arquivo para "staged".
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/parastaged.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/parastaged.png" alt="Image" width="500px" />
 </p>
 
 
 Use o comando "git commit" para adicionar o arquivo e criar uma nova captura instantânea composta da "layer" de confirmação anterior, juntamente com os arquivos na "staged layer". Isso mudará o estado do arquivo para "não modificado".
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/paranaomodificado.png" alt="Image" width="100%" />
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/paranaomodificado.png" alt="Image" width="500px" />
 </p>
 
 ### Conheça SHA-1
@@ -657,13 +657,13 @@ C:\Users\x_kat\Desktop\cafes_recipes
 ```
 
 A seguir a descrição de alguns comandos Git que podem ser utilizados:
-|     Comando                                 |     Descrição                                                                              |
-|---------------------------------------------|--------------------------------------------------------------------------------------------|
-|     git init                                |     Inicialize um repositório git no repositório atual                                     |
-|     git ls-files                            |     Listar os arquivos no repositório                                                      |
-|     git   ls-files \| xargs cat \| wc -l    |     No PowerShel, conta o total de linhas do arquivos do repositório,   recursivamente.    |
-|     git   ls-files \| xargs wc -l           |                                                                                            |
-|     start PATH                              |     Abre o Windows Explorer no caminho espicificado                                        |
+
+|     Comando                                 |     Descrição                |
+|---------------------------------------------|--------------------------------|
+|     git init                                |     Inicialize um repositório git no repositório atual          |
+|     git ls-files                            |     Listar os arquivos no repositório       |
+|     git   ls-files \| xargs cat \| wc -l  <br>  git   ls-files \| xargs wc -l  |     No PowerShel, conta o total de linhas do arquivos do repositório,   recursivamente.   |
+|     start PATH                              |     Abre o Windows Explorer no caminho espicificado    |
 
 Agora que estamos na pasta, a inicialização de repositórios Git é feita digitando o comando Git init. Depois de executado, você verá uma mensagem de resposta que diz inicializada. 
 
@@ -694,65 +694,108 @@ start .git
 
 
 Você pode ver outros arquivos lá, mas este é um repositório git init novo, é o que você vê por padrão. 
-Entrada	Descrição
-arquivo description	é usado apenas pelo programa GitWeb
+|     Entrada                |     Descrição                              |
+|----------------------------|--------------------------------------------|
+|     arquivo description    |     é usado apenas pelo programa GitWeb    |
  
+ <p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/arquivodescription.png" alt="Image" width="100%" />
+</p>
 
-Entrada	Descrição
-arquivo config	opções de configuração específicas do projeto
-diretório info	mantém um arquivo de exclusão global para padrões ignorados que você não deseja rastrear em um arquivo .gitignore
+
+
+|     Entrada           |     Descrição        |
+|-----------------------|-----------------|
+|     arquivo config    |     opções de configuração específicas do projeto           |
+|     diretório info    |     mantém um arquivo de exclusão global para padrões   ignorados que você não deseja rastrear em um arquivo .gitignore    |
  
+ <p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/arquivoconfig.png" alt="Image" width="100%" />
+</p>
 
-Entrada	Descrição
-diretório hooks	contém os scripts hook do lado do cliente ou do servidor
 
 
- 
+|     Entrada            |     Descrição                                                     |
+|------------------------|-------------------------------------------------------------------|
+|     diretório hooks    |     contém os scripts hook do lado do cliente ou do   servidor    |
+
+ <p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/diretóriohooks.png" alt="Image" width="500px" />
+</p>
+
 
 Isso deixa quatro partes principais do Git que iremos ver com mais detalhes: 
-Entrada	Descrição
-diretórios objects	armazena todo o conteúdo do seu banco de dados (blob, tree, commits e tags)
-diretórios refs	armazena ponteiros em objetos commit nesses dados (ramificações)
-arquivo HEAD	aponta para a ramificação que você fez check-out
-arquivos de índice	armazena sua área de armazenamento temporário em formação
 
-OBJETOS GIT
+|     Entrada               |     Descrição                                                                        |
+|---------------------------|--------------------------------------------------------------------------------------|
+|     diretórios objects    |     armazena todo o conteúdo do seu banco de dados   (blob, tree, commits e tags)    |
+|     diretórios refs       |     armazena ponteiros em objetos commit nesses dados   (ramificações)               |
+|     arquivo HEAD          |     aponta para a ramificação que você fez check-out                                 |
+|     arquivos de índice    |     armazena sua área de armazenamento temporário em   formação                      |
+
+### OBJETOS GIT
 
 Git é um sistema de arquivos endereçável por conteúdo, isso significa que, no centro do Git, há um simples armazenamento de dados de valores-chave. Você pode inserir qualquer tipo de conteúdo e fornecerá uma chave que você pode usar para recuperar o conteúdo novamente a qualquer momento. Para demonstrar, você pode usar o comando de plumbing hash-object, que pega alguns dados, armazena-os no diretório .git e devolve a chave em que os dados estão armazenados. Primeiro, você inicializa um novo repositório Git e verifica se não há nada no diretório de objetos:
- 
+
+ <p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/objetosinfo.png" alt="Image" width="500px" />
+</p>
+
+
 
 O Git inicializou o diretório de objetos e criou subdiretórios de pacote e informações, mas não há arquivos regulares. E se executarmos novamente o comando git hash-object para a string "Apple Pie" com –w, obteremos o hash e também salvaremos o conteúdo no diretório, objetos dentro do diretório .git.
+
+```bash
 echo "Apple Pie" | git hash-object –w --stdin
+```
+ <p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/echoapplepie.png" alt="Image" width="500px" />
+</p>
  
 
 O -w diz ao objeto hash para armazenar o objeto; caso contrário, o comando simplesmente informa qual seria a chave. --stdin diz ao comando para ler o conteúdo do stdin; se você não especificar isso, o hash-object espera um caminho de arquivo no final. A saída do comando é um hash de soma de verificação de 40 caracteres. Esse é o hash SHA-1 - uma soma de verificação do conteúdo que você está armazenando e um cabeçalho. Agora você pode ver como o Git armazenou seus dados:
- 
- 
+
+ <p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/gitobjetos.png" alt="Image" width="500px" />
+</p>
+
+ <p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/objetosbb.png" alt="Image" width="500px" />
+</p>
+
 
 No subdiretório bb, que são os dois primeiros dígitos hexadecimais do SHA-1 da string que acabamos de salvar. E se olharmos dentro de bb, há um arquivo aqui e o nome desse arquivo são os 38 caracteres restantes do SHA-1. O Git usa esse esquema para organizar o conteúdo e distribuí-lo por vários diretórios. É apenas um truque para evitar acumular todo o conteúdo em um único diretório desordenado. Além disso dependendo dos sistemas de arquivos o número máximo de arquivos em uma única pasta varia e, ao criar subdiretórios, ajuda a balancear a carga de arquivos por diretório.
-Sistema	Máximo de arquivos 
-FAT/FAT16	512
-FAT32	65,534
-NTFS	4,294,967,295
-exFAT	2,796,202
+
+|     Sistema      |     Máximo de arquivos     |
+|------------------|----------------------------|
+|     FAT/FAT16    |     512                    |
+|     FAT32        |     65,534                 |
+|     NTFS         |     4,294,967,295          |
+|     exFAT        |     2,796,202              |
 
 Os dados mais importantes estão no diretório chamado banco de dados de objetos.  Existem alguns tipos diferentes de objetos no banco de dados;  
-- objetos blobs: representam o conteúdo de um arquivo em algum momento da história do projeto.  
-- objetos tree (árvores): que representam pastas no projeto.  É um ponteiro SHA-1 para um blob ou subárvore com seu modo, tipo e nome de arquivo associados.
-- objetos commit:  Sempre que você faz um commit do git, o Git cria um commit.  
+- **objetos blobs**: representam o conteúdo de um arquivo em algum momento da história do projeto.  
+- **objetos tree (árvores)**: que representam pastas no projeto.  É um ponteiro SHA-1 para um blob ou subárvore com seu modo, tipo e nome de arquivo associados.
+- **objetos commit**:  Sempre que você faz um commit do git, o Git cria um commit.  
 
 Todos esses objetos são imutáveis, podem ser criados e excluídos, mas nunca podem ser alterados.  Esses objetos são vinculados em uma estrutura que representa o histórico do seu projeto.  
 
-Blob de dados
+### Blob de dados
 
 Nossa sequência original, "Apple Pie", está dentro desse arquivo. Isso é o que o Git chama de blob de dados. Um blob é uma parte genérica do conteúdo, onde o Git adicionou um cabeçalho pequeno e compactou o conteúdo para economizar espaço. Portanto, não podemos simplesmente abrir o arquivo e lê-lo. Para examinar o conteúdo podemos usar outro comando chamado git cat-file.
-Comando	Descrição
-git cat‑file SHA1	Pega o SHA‑1 de um objeto e um argumento. Se o argumento for -t, retorna o tipo de arquivo, se o argumento for –p realiza impressão elegante.
-echo 'version 1' > test.txt	Gera/Altera arquivo com conteúdo 'version 1'
-git hash-object -w text.txt	Gera SHA‑1 de arquivo no banco de dados
+
+|     Comando                        |     Descrição                     |
+|------------------------------------|--------------------------------------|
+|     git cat‑file SHA1              |     Pega o SHA‑1 de um objeto e um argumento. Se o argumento for -t,   retorna o tipo de arquivo, se o argumento for –p realiza impressão elegante.    |
+|     echo 'version 1' > test.txt    |     Gera/Altera arquivo com conteúdo 'version 1'             |
+|     git hash-object -w text.txt    |     Gera SHA‑1 de arquivo no banco de dados              |
 
 O comando git cat-file pega o SHA‑1 de um objeto e um argumento. Se o executarmos com o argumento -t, significa type, que no caso aqui é um blob. E se o executarmos novamente com –p para uma impressão elegante, o Git descompacta o objeto, remove o cabeçalho e imprime o conteúdo real do blob. 
- 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shyoutarou/Git_GitHUB/master/.github/catfile.png" alt="Image" width="100%" />
+</p>
+
 
 Até agora, vimos que o Git é capaz de pegar qualquer parte do conteúdo, gerar a chave para ele, um SHA-1, e depois persistir o conteúdo no repositório como um blob, um mapa persistente. Agora, você pode adicionar conteúdo ao Git e retirá-lo novamente. Você também pode fazer isso com o conteúdo dos arquivos. Por exemplo, você pode fazer algum controle de versão simples em um arquivo. Primeiro, crie um novo arquivo e salve seu conteúdo no seu banco de dados:
 echo 'version 1' > test.txt
